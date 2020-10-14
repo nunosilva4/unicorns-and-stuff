@@ -1,19 +1,20 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
-public class PlayerBehaviour {
+public class PlayerMovement {
 
-    public void moveUp(){
+    public static void moveUp() {
         //TODO do it bruh
     }
-    public void moveDown(){
+
+    public static void moveDown() {
         //TODO do it caralho
     }
 
-    public void moveLeft(){
+    public static void moveLeft() {
         //TODO siga fodasse
     }
 
-    public void moveRight(){
+    public static void moveRight() {
         //TODO LSDHFBGOUYSDFG :)
     }
 }
