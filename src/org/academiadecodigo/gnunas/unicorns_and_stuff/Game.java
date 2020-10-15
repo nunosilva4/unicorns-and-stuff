@@ -22,6 +22,8 @@ public class Game {
         players[1] = new Player(200, 200);
 
         drawScreen(800, 600);
+
+        process();
     }
 
     private void drawScreen(int width, int height) {
