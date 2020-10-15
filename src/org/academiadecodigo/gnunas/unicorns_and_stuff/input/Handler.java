@@ -2,9 +2,7 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-
 import java.util.ArrayList;
-
 import static org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent.*;
 
 public class Handler implements KeyboardHandler {
@@ -12,7 +10,6 @@ public class Handler implements KeyboardHandler {
     private ArrayList<MovementType> playerOneMovement;
     private ArrayList<MovementType> playerTwoMovement;
 
-    //TODO finish constructor and implement keybindings and behaviour
     public Handler() {
         playerOneMovement = new ArrayList<>();
         playerTwoMovement = new ArrayList<>();
@@ -23,36 +20,74 @@ public class Handler implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
             case KEY_UP:
-                playerOneMovement.add(MovementType.UP);
+                if (!playerOneMovement.contains(MovementType.UP)) {
+                    playerOneMovement.add(MovementType.UP);
+                }
                 break;
             case KEY_DOWN:
-                //TODO register
+                if (!playerOneMovement.contains(MovementType.DOWN)) {
+                    playerOneMovement.add(MovementType.DOWN);
+                }
                 break;
             case KEY_LEFT:
-                //TODO register
+                if (!playerOneMovement.contains(MovementType.LEFT)) {
+                    playerOneMovement.add(MovementType.LEFT);
+                }
                 break;
             case KEY_RIGHT:
-                //TODO register
+                if (!playerOneMovement.contains(MovementType.RIGHT)) {
+                    playerOneMovement.add(MovementType.RIGHT);
+                }
                 break;
             case KEY_W:
-                //TODO register
+                if (!playerTwoMovement.contains(MovementType.UP)) {
+                    playerTwoMovement.add(MovementType.UP);
+                }
                 break;
             case KEY_S:
-                //TODO register
+                if (!playerTwoMovement.contains(MovementType.DOWN)) {
+                    playerTwoMovement.add(MovementType.DOWN);
+                }
                 break;
             case KEY_A:
-                //TODO register
+                if (!playerTwoMovement.contains(MovementType.LEFT)) {
+                    playerTwoMovement.add(MovementType.LEFT);
+                }
                 break;
             case KEY_D:
-                //TODO register
-
-                //TODO finish rest of the keybinds
-
+                if (playerTwoMovement.contains(MovementType.RIGHT)) {
+                    playerTwoMovement.add(MovementType.RIGHT);
+                    break;
+                }
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-
+        switch (keyboardEvent.getKey()) {
+            case KEY_UP:
+                playerOneMovement.remove(MovementType.UP);
+                break;
+            case KEY_DOWN:
+                playerOneMovement.remove(MovementType.DOWN);
+                break;
+            case KEY_LEFT:
+                playerOneMovement.remove(MovementType.LEFT);
+                break;
+            case KEY_RIGHT:
+                playerOneMovement.remove(MovementType.RIGHT);
+                break;
+            case KEY_W:
+                playerTwoMovement.remove(MovementType.UP);
+                break;
+            case KEY_S:
+                playerTwoMovement.remove(MovementType.DOWN);
+                break;
+            case KEY_A:
+                playerTwoMovement.remove(MovementType.LEFT);
+                break;
+            case KEY_D:
+                playerTwoMovement.remove(MovementType.RIGHT);
+        }
     }
 }
