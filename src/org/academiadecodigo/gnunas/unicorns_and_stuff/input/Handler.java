@@ -2,17 +2,19 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent.*;
 
 public class Handler implements KeyboardHandler {
 
-    private ArrayList<MovementType> playerOneMovement;
-    private ArrayList<MovementType> playerTwoMovement;
+    private List<MovementType> playerOneMovement;
+    private List<MovementType> playerTwoMovement;
 
     public Handler() {
-        playerOneMovement = new ArrayList<>();
-        playerTwoMovement = new ArrayList<>();
+        playerOneMovement = new LinkedList<>();
+        playerTwoMovement = new LinkedList<>();
     }
 
     @Override
