@@ -15,9 +15,12 @@ public class Projectile {
         this.y = y;
         this.damageAmount = damageAmount;
         this.direction = direction;
-        this.projectile = new Ellipse(x, y, 50, 50);
+        projectile = new Ellipse(x, y, 10, 10);
+
+        projectile.fill();
     }
 
+    // TODO add different velocity
     public void move() {
         switch (direction) {
             case UP:
@@ -36,16 +39,19 @@ public class Projectile {
     }
 
     public int getX() {
-        return x;
+        return projectile.getX();
     }
 
     public int getY() {
-        return y;
+        return projectile.getY();
     }
 
     public int getDamageAmount() {
         return damageAmount;
     }
 
-
+    // TODO Erase from memory
+    public void remove() {
+        projectile.delete();
+    }
 }
