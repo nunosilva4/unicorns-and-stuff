@@ -17,7 +17,7 @@ public class UnicornsTest {
 
         /*Rectangle rectangle = new Rectangle(0, 0, 1500, 500);
         rectangle.draw();
-        Picture picture = new Picture(1200, 0, "resources/unicorn.png");
+        Picture picture = new Picture(1200, 0, "resources/unicornLeft.png");
         picture.draw();
         Picture picture2 = new Picture(0, 0, "resources/unicorn2.png");
         picture2.draw();*/
