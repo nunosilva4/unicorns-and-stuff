@@ -18,6 +18,7 @@ public class Handler implements KeyboardHandler {
         playerTwoMovement = new LinkedHashSet<>();
     }
 
+    // TODO add two shoot keys to call player method shoot and add delay!!
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
