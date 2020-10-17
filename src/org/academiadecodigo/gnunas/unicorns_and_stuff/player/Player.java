@@ -9,16 +9,16 @@ import java.util.Set;
 public class Player {
 
     //Trying out stuff
-    private Picture[] sprites;
     private Set<Direction> movement;
     private Picture currentSprite;
+    private String[] imagePath;
 
-    public Player(Set<Direction> movement, Picture[] sprites) {
-        this.sprites = sprites;
+    public Player(Set<Direction> movement, Picture startingSprite, String[] imagePath) {
+        this.imagePath = imagePath;
         this.movement = movement;
 
-        currentSprite = sprites[0];
-        sprites[0].draw();
+        currentSprite = startingSprite;
+        currentSprite.draw();
 
     }
 
@@ -43,9 +43,11 @@ public class Player {
                 break;
             case LEFT:
                 currentSprite.translate(-1 , 0);
+                currentSprite.load(imagePath[0]);
                 break;
             case RIGHT:
                 currentSprite.translate(1, 0);
+                currentSprite.load(imagePath[1]);
                 break;
             default:
                 break;
