@@ -14,7 +14,6 @@ public class UnicornsTest {
 
         //TODO siga pessoal
 
-        new Game(MapType.STANDARD);
 
         /*Rectangle rectangle = new Rectangle(0, 0, 1500, 500);
         rectangle.draw();
@@ -26,43 +25,84 @@ public class UnicornsTest {
         Handler keyBindings = new Handler();
         Keyboard keyboard = new Keyboard(keyBindings);
 
-        KeyboardEvent goUp = new KeyboardEvent();
-        KeyboardEvent goDown = new KeyboardEvent();
-        KeyboardEvent goLeft = new KeyboardEvent();
-        KeyboardEvent goRight = new KeyboardEvent();
-
-        KeyboardEvent goUpW = new KeyboardEvent();
-        KeyboardEvent goDownS = new KeyboardEvent();
-        KeyboardEvent goLeftA = new KeyboardEvent();
-        KeyboardEvent goRightD = new KeyboardEvent();
+        //Player One Events
+        KeyboardEvent playerOneGoUp = new KeyboardEvent();
+        KeyboardEvent playerOneGoDown = new KeyboardEvent();
+        KeyboardEvent playerOneGoLeft = new KeyboardEvent();
+        KeyboardEvent playerOneGoRight = new KeyboardEvent();
+        KeyboardEvent playerOneDeleteUp = new KeyboardEvent();
+        KeyboardEvent playerOneDeleteDown = new KeyboardEvent();
+        KeyboardEvent playerOneDeleteLeft = new KeyboardEvent();
+        KeyboardEvent playerOneDeleteRight = new KeyboardEvent();
+        //Player Two Events
+        KeyboardEvent playerTwoGoUp = new KeyboardEvent();
+        KeyboardEvent playerTwoGoDown = new KeyboardEvent();
+        KeyboardEvent playerTwoGoLeft = new KeyboardEvent();
+        KeyboardEvent playerTwoGoRight = new KeyboardEvent();
+        KeyboardEvent playerTwoDeleteUp = new KeyboardEvent();
+        KeyboardEvent playerTwoDeleteDown = new KeyboardEvent();
+        KeyboardEvent playerTwoDeleteLeft = new KeyboardEvent();
+        KeyboardEvent playerTwoDeleteRight = new KeyboardEvent();
 
         //Player One
-        goUp.setKey(KeyboardEvent.KEY_UP);
-        goUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goUp);
-        goDown.setKey(KeyboardEvent.KEY_DOWN);
-        goDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goDown);
-        goLeft.setKey(KeyboardEvent.KEY_LEFT);
-        goLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goLeft);
-        goRight.setKey(KeyboardEvent.KEY_RIGHT);
-        goRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goRight);
-
+        //UP
+        playerOneGoUp.setKey(KeyboardEvent.KEY_UP);
+        playerOneGoUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerOneGoUp);
+        playerOneDeleteUp.setKey(KeyboardEvent.KEY_UP);
+        playerOneDeleteUp.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerOneDeleteUp);
+        //DOWN
+        playerOneGoDown.setKey(KeyboardEvent.KEY_DOWN);
+        playerOneGoDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerOneGoDown);
+        playerOneDeleteDown.setKey(KeyboardEvent.KEY_DOWN);
+        playerOneDeleteDown.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerOneDeleteDown);
+        //LEFT
+        playerOneGoLeft.setKey(KeyboardEvent.KEY_LEFT);
+        playerOneGoLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerOneGoLeft);
+        playerOneDeleteLeft.setKey(KeyboardEvent.KEY_LEFT);
+        playerOneDeleteLeft.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerOneDeleteLeft);
+        //RIGHT
+        playerOneGoRight.setKey(KeyboardEvent.KEY_RIGHT);
+        playerOneGoRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerOneGoRight);
+        playerOneDeleteRight.setKey(KeyboardEvent.KEY_RIGHT);
+        playerOneDeleteRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerOneDeleteRight);
         //Player Two
-        goUpW.setKey(KeyboardEvent.KEY_W);
-        goUpW.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goUpW);
-        goDownS.setKey(KeyboardEvent.KEY_S);
-        goDownS.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goDownS);
-        goLeftA.setKey(KeyboardEvent.KEY_A);
-        goLeftA.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goLeftA);
-        goRightD.setKey(KeyboardEvent.KEY_D);
-        goRightD.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goRightD);
+        //UP
+        playerTwoGoUp.setKey(KeyboardEvent.KEY_W);
+        playerTwoGoUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerTwoGoUp);
+        playerTwoDeleteUp.setKey(KeyboardEvent.KEY_W);
+        playerTwoDeleteUp.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerTwoDeleteUp);
+        //DOWN
+        playerTwoGoDown.setKey(KeyboardEvent.KEY_S);
+        playerTwoGoDown.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerTwoGoDown);
+        playerTwoDeleteDown.setKey(KeyboardEvent.KEY_S);
+        playerTwoDeleteDown.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerTwoDeleteDown);
+        //LEFT
+        playerTwoGoLeft.setKey(KeyboardEvent.KEY_A);
+        playerTwoGoLeft.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerTwoGoLeft);
+        playerTwoDeleteLeft.setKey(KeyboardEvent.KEY_A);
+        playerTwoDeleteLeft.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerTwoDeleteLeft);
+        //RIGHT
+        playerTwoGoRight.setKey(KeyboardEvent.KEY_D);
+        playerTwoGoRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerTwoGoRight);
+        playerTwoDeleteRight.setKey(KeyboardEvent.KEY_D);
+        playerTwoDeleteRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+        keyboard.addEventListener(playerTwoDeleteRight);
 
+        new Game(MapType.STANDARD);
     }
 }

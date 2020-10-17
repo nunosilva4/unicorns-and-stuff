@@ -2,19 +2,20 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent.*;
 
 public class Handler implements KeyboardHandler {
 
-    private List<MovementType> playerOneMovement;
-    private List<MovementType> playerTwoMovement;
+    private static Set<Direction> playerOneMovement;
+    private static Set<Direction> playerTwoMovement;
 
     public Handler() {
-        playerOneMovement = new LinkedList<>();
-        playerTwoMovement = new LinkedList<>();
+        playerOneMovement = new LinkedHashSet<>();
+        playerTwoMovement = new LinkedHashSet<>();
     }
 
     @Override
@@ -22,45 +23,29 @@ public class Handler implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
             case KEY_UP:
-                if (!playerOneMovement.contains(MovementType.UP)) {
-                    playerOneMovement.add(MovementType.UP);
-                }
+                playerOneMovement.add(Direction.UP);
                 break;
             case KEY_DOWN:
-                if (!playerOneMovement.contains(MovementType.DOWN)) {
-                    playerOneMovement.add(MovementType.DOWN);
-                }
+                playerOneMovement.add(Direction.DOWN);
                 break;
             case KEY_LEFT:
-                if (!playerOneMovement.contains(MovementType.LEFT)) {
-                    playerOneMovement.add(MovementType.LEFT);
-                }
+                playerOneMovement.add(Direction.LEFT);
                 break;
             case KEY_RIGHT:
-                if (!playerOneMovement.contains(MovementType.RIGHT)) {
-                    playerOneMovement.add(MovementType.RIGHT);
-                }
+                playerOneMovement.add(Direction.RIGHT);
                 break;
             case KEY_W:
-                if (!playerTwoMovement.contains(MovementType.UP)) {
-                    playerTwoMovement.add(MovementType.UP);
-                }
+                playerTwoMovement.add(Direction.UP);
                 break;
             case KEY_S:
-                if (!playerTwoMovement.contains(MovementType.DOWN)) {
-                    playerTwoMovement.add(MovementType.DOWN);
-                }
+                playerTwoMovement.add(Direction.DOWN);
                 break;
             case KEY_A:
-                if (!playerTwoMovement.contains(MovementType.LEFT)) {
-                    playerTwoMovement.add(MovementType.LEFT);
-                }
+                playerTwoMovement.add(Direction.LEFT);
                 break;
             case KEY_D:
-                if (playerTwoMovement.contains(MovementType.RIGHT)) {
-                    playerTwoMovement.add(MovementType.RIGHT);
-                    break;
-                }
+                playerTwoMovement.add(Direction.RIGHT);
+                break;
         }
     }
 
@@ -68,28 +53,36 @@ public class Handler implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
             case KEY_UP:
-                playerOneMovement.remove(MovementType.UP);
+                playerOneMovement.remove(Direction.UP);
                 break;
             case KEY_DOWN:
-                playerOneMovement.remove(MovementType.DOWN);
+                playerOneMovement.remove(Direction.DOWN);
                 break;
             case KEY_LEFT:
-                playerOneMovement.remove(MovementType.LEFT);
+                playerOneMovement.remove(Direction.LEFT);
                 break;
             case KEY_RIGHT:
-                playerOneMovement.remove(MovementType.RIGHT);
+                playerOneMovement.remove(Direction.RIGHT);
                 break;
             case KEY_W:
-                playerTwoMovement.remove(MovementType.UP);
+                playerTwoMovement.remove(Direction.UP);
                 break;
             case KEY_S:
-                playerTwoMovement.remove(MovementType.DOWN);
+                playerTwoMovement.remove(Direction.DOWN);
                 break;
             case KEY_A:
-                playerTwoMovement.remove(MovementType.LEFT);
+                playerTwoMovement.remove(Direction.LEFT);
                 break;
             case KEY_D:
-                playerTwoMovement.remove(MovementType.RIGHT);
+                playerTwoMovement.remove(Direction.RIGHT);
         }
+    }
+
+    public static Set<Direction> getPlayerOneMovement() {
+        return playerOneMovement;
+    }
+
+    public static Set<Direction> getPlayerTwoMovement() {
+        return playerTwoMovement;
     }
 }

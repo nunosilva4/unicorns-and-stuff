@@ -1,11 +1,11 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff;
-
+import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
@@ -18,8 +18,11 @@ public class Game {
 
         players = new Player[2];
 
-        players[0] = new Player(50,50);
-        players[1] = new Player(200, 200);
+        Picture[] playerOnePictures = {new Picture(250, 250, "resources/unicorn.png")};
+        Picture[] playerTwoPictures = {new Picture(50, 50, "resources/unicorn2.png")};
+
+        players[0] = new Player(Handler.getPlayerOneMovement(), playerOnePictures);
+        players[1] = new Player(Handler.getPlayerTwoMovement(), playerTwoPictures);
 
         drawScreen(800, 600);
 
@@ -32,24 +35,24 @@ public class Game {
     }
 
     private void process() {
-        final int FRAMES_PER_SECOND = 60;
+        final int FRAMES_PER_SECOND = 120;
         final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 
-        long next_game_tick = System.currentTimeMillis();
+        long nextGameTick = System.currentTimeMillis();
 
-        long sleep_time = 0;
+        long sleepTime = 0;
 
-        boolean game_is_running = true;
+        boolean gameRunning = true;
 
-        while( game_is_running ) {
-            update_game();
-            display_game();
+        while( gameRunning ) {
+            updateGame();
+            render();
 
-            next_game_tick += SKIP_TICKS;
-            sleep_time = next_game_tick - System.currentTimeMillis();
-            if( sleep_time >= 0 ) {
+            nextGameTick += SKIP_TICKS;
+            sleepTime = nextGameTick - System.currentTimeMillis();
+            if( sleepTime >= 0 ) {
                 try {
-                    Thread.sleep(sleep_time);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -57,11 +60,12 @@ public class Game {
         }
     }
 
-    private void update_game() {
-
+    private void updateGame() {
+        players[0].move();
+        players[1].move();
     }
 
-    private void display_game() {
+    private void render() {
 
     }
 }
