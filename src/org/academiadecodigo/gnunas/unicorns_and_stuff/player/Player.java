@@ -1,6 +1,7 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
+import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.Iterator;
@@ -11,6 +12,7 @@ public class Player {
     //Trying out stuff
     private Picture[] sprites;
     private Set<Direction> movement;
+    private Direction lastDirection;
     private Picture currentSprite;
 
     public Player(Set<Direction> movement, Picture[] sprites) {
@@ -34,7 +36,7 @@ public class Player {
             return;
         }
 
-        switch (direction){
+        switch (direction) {
             case UP:
                 currentSprite.translate(0, -1);
                 break;
@@ -50,5 +52,17 @@ public class Player {
             default:
                 break;
         }
+    }
+
+    public void attack() {
+        Projectile projectile = new Projectile(getX(), getY(), 10, lastDirection);
+    }
+
+    public int getX() {
+        return currentSprite.getX();
+    }
+
+    public int getY() {
+        return currentSprite.getY();
     }
 }
