@@ -19,7 +19,7 @@ public class Game {
         players = new Player[2];
 
         Picture[] playerOnePictures = {new Picture(250, 250, "resources/unicorn.png")};
-        Picture[] playerTwoPictures = {new Picture(50, 50, "resources/unicorn2.png")};
+        Picture[] playerTwoPictures = {new Picture(50, 50, "resources/nazicorn.png")};
 
         players[0] = new Player(Handler.getPlayerOneMovement(), playerOnePictures);
         players[1] = new Player(Handler.getPlayerTwoMovement(), playerTwoPictures);

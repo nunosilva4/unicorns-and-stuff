@@ -10,7 +10,6 @@ public class Player {
 
     //Trying out stuff
     private Picture[] sprites;
-    private final int NUMBER_OF_PICTURES = 8;
     private Set<Direction> movement;
     private Picture currentSprite;
 
