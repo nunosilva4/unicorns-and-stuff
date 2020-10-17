@@ -1,4 +1,5 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff;
+
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
@@ -18,11 +19,13 @@ public class Game {
 
         players = new Player[2];
 
-        Picture[] playerOnePictures = {new Picture(250, 250, "resources/unicorn.png")};
-        Picture[] playerTwoPictures = {new Picture(50, 50, "resources/nazicorn.png")};
+        Picture playerOnePicture = new Picture(250, 250, "resources/UniCorn/unicornLeft.png");
+        Picture playerTwoPicture = new Picture(50, 50, "resources/NaziCorn/nazicornRight.png");
+        String[] playerOneImagePaths = {"resources/UniCorn/unicornLeft.png", "resources/UniCorn/unicornRight.png"};
+        String[] playerTwoImagePaths = {"resources/NaziCorn/nazicornLeft.png", "resources/NaziCorn/nazicornRight.png"};
 
-        players[0] = new Player(Handler.getPlayerOneMovement(), playerOnePictures);
-        players[1] = new Player(Handler.getPlayerTwoMovement(), playerTwoPictures);
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths);
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths);
 
         drawScreen(800, 600);
 
@@ -30,7 +33,7 @@ public class Game {
     }
 
     private void drawScreen(int width, int height) {
-        Rectangle screen = new Rectangle(0,0,width,height);
+        Rectangle screen = new Rectangle(0, 0, width, height);
         screen.draw();
     }
 
@@ -44,13 +47,13 @@ public class Game {
 
         boolean gameRunning = true;
 
-        while( gameRunning ) {
+        while (gameRunning) {
             updateGame();
             render();
 
             nextGameTick += SKIP_TICKS;
             sleepTime = nextGameTick - System.currentTimeMillis();
-            if( sleepTime >= 0 ) {
+            if (sleepTime >= 0) {
                 try {
                     Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {

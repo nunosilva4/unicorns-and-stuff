@@ -10,29 +10,30 @@ import java.util.Set;
 public class Player {
 
     //Trying out stuff
-    private Picture[] sprites;
+    private String name;
     private Set<Direction> movement;
     private Direction lastDirection;
     private Picture currentSprite;
+    private String[] imagePath;
 
-    public Player(Set<Direction> movement, Picture[] sprites) {
-        this.sprites = sprites;
+    public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath) {
+        this.imagePath = imagePath;
         this.movement = movement;
+        this.name = name;
 
-        currentSprite = sprites[0];
-        sprites[0].draw();
-
+        currentSprite = startingSprite;
+        currentSprite.draw();
     }
 
     public void move() {
         Iterator<Direction> iterator = movement.iterator();
         Direction direction = null;
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             direction = iterator.next();
         }
 
-        if (direction == null){
+        if (direction == null) {
             return;
         }
 
@@ -44,10 +45,12 @@ public class Player {
                 currentSprite.translate(0, 1);
                 break;
             case LEFT:
-                currentSprite.translate(-1 , 0);
+                currentSprite.translate(-1, 0);
+                currentSprite.load(imagePath[0]);
                 break;
             case RIGHT:
                 currentSprite.translate(1, 0);
+                currentSprite.load(imagePath[1]);
                 break;
             default:
                 break;
