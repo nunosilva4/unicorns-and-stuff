@@ -2,25 +2,13 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class UnicornsTest {
     public static void main(String[] args) {
-
-        //TODO siga pessoal
-
-
-        /*Rectangle rectangle = new Rectangle(0, 0, 1500, 500);
-        rectangle.draw();
-        Picture picture = new Picture(1200, 0, "resources/unicornLeft.png");
-        picture.draw();
-        Picture picture2 = new Picture(0, 0, "resources/unicorn2.png");
-        picture2.draw();*/
 
         Handler keyBindings = new Handler();
         Keyboard keyboard = new Keyboard(keyBindings);

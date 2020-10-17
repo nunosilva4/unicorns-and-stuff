@@ -35,6 +35,26 @@ public class Player {
             return;
         }
 
+        if(movement.contains(Direction.UP) && movement.contains(Direction.LEFT)){
+            currentSprite.translate(-1, -1);
+            return;
+        }
+
+        if(movement.contains(Direction.UP) && movement.contains(Direction.RIGHT)){
+            currentSprite.translate(1, -1);
+            return;
+        }
+
+        if(movement.contains(Direction.DOWN) && movement.contains(Direction.LEFT)){
+            currentSprite.translate(-1, 1);
+            return;
+        }
+
+        if(movement.contains(Direction.DOWN) && movement.contains(Direction.RIGHT)){
+            currentSprite.translate(1, 1);
+            return;
+        }
+
         switch (direction) {
             case UP:
                 currentSprite.translate(0, -1);

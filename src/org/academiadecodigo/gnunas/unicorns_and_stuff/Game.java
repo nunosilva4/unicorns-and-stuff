@@ -15,14 +15,23 @@ public class Game {
     private Player[] players;
 
     public Game(MapType mapType) {
+
         map = MapFactory.makeMap(mapType);
 
         players = new Player[2];
 
-        Picture playerOnePicture = new Picture(250, 250, "resources/UniCorn/unicornLeft.png");
-        Picture playerTwoPicture = new Picture(50, 50, "resources/NaziCorn/nazicornRight.png");
-        String[] playerOneImagePaths = {"resources/UniCorn/unicornLeft.png", "resources/UniCorn/unicornRight.png"};
-        String[] playerTwoImagePaths = {"resources/NaziCorn/nazicornLeft.png", "resources/NaziCorn/nazicornRight.png"};
+        Picture playerOnePicture = new Picture(725, 275, "resources/Unicorn/unicornLeft.png");
+        Picture playerTwoPicture = new Picture(20, 275, "resources/Nazicorn/nazicornRight.png");
+
+        String[] playerOneImagePaths = {
+                "resources/Unicorn/unicornLeft.png",
+                "resources/Unicorn/unicornRight.png"
+        };
+
+        String[] playerTwoImagePaths = {
+                "resources/Nazicorn/nazicornLeft.png",
+                "resources/Nazicorn/nazicornRight.png"
+        };
 
         players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths);
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths);
