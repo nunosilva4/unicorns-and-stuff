@@ -22,6 +22,7 @@ public class Player {
 
     private Picture currentSprite;
     private String[] imagePath;
+    private int health = 100;
 
     public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath) {
         this.name = name;
@@ -36,6 +37,16 @@ public class Player {
         currentSprite = startingSprite;
 
         currentSprite.draw();
+    }
+
+    public boolean isDead(){
+        return health <= 0;
+    }
+
+    public void hit(int damage){
+        if (health > 0){
+            health = health - damage;
+        }
     }
 
     public void move() {
