@@ -14,6 +14,11 @@ public class Game {
 
     private Player[] players;
 
+    public static final int WIDTH = 800;
+
+    public static final int HEIGHT = 600;
+
+
     public Game(MapType mapType) {
         map = MapFactory.makeMap(mapType);
 
@@ -27,7 +32,7 @@ public class Game {
         players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths);
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths);
 
-        drawScreen(800, 600);
+        drawScreen(WIDTH, HEIGHT);
 
         process();
     }
@@ -64,8 +69,10 @@ public class Game {
     }
 
     private void updateGame() {
-        players[0].move();
-        players[1].move();
+        for (Player player : players) {
+            player.move();
+            player.updateProjectile();
+        }
     }
 
     private void render() {
