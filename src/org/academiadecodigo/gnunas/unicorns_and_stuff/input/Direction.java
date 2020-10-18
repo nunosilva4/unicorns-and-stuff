@@ -6,5 +6,4 @@ public enum Direction {
     LEFT,
     RIGHT;
 
-    //TODO continue enum logic
 }
