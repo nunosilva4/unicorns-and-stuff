@@ -57,6 +57,12 @@ public class Projectile {
         }
     }
 
+    public void hit(Player player) {
+        player.hit(damageAmount);
+
+        remove(player.getProjectilesList());
+    }
+
     // TODO Erase from memory
     public void remove(LinkedList<Projectile> projectiles) {
         projectiles.remove(this);
