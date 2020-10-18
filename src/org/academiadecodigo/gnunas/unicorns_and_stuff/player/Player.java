@@ -40,7 +40,7 @@ public class Player {
 
     public void hit(int damage) {
         if (health > 0) {
-            health = health - damage;
+            health -= damage;
         }
     }
 

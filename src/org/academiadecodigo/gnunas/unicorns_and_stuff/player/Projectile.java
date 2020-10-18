@@ -56,6 +56,12 @@ public class Projectile {
         }
     }
 
+    public void hit(Player player) {
+        player.hit(damageAmount);
+
+        remove(player.getProjectilesList());
+    }
+
     // TODO Erase from memory
     public void remove(List<Projectile> projectiles) {
         projectileSprite.delete();
