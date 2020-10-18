@@ -125,4 +125,8 @@ public class Player {
     public int getY() {
         return currentSprite.getY() + currentSprite.getHeight() / 2;
     }
+
+    public int getHealth() {
+        return health;
+    }
 }
