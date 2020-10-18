@@ -8,6 +8,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -15,12 +16,13 @@ public class Game {
 
     private Map map;
 
-    private Player[] players;
+    private static Player[] players;
 
-    public static final int WIDTH = 800;
+    public static final int WIDTH = 1024;
 
-    public static final int HEIGHT = 600;
+    public static final int HEIGHT = 610;
 
+    public static final int PADDING = 10;
 
     public Game(MapType mapType) {
 
@@ -28,8 +30,8 @@ public class Game {
 
         players = new Player[2];
 
-        Picture playerOnePicture = new Picture(725, 275, "resources/Unicorn/unicornLeft.png");
-        Picture playerTwoPicture = new Picture(20, 275, "resources/Nazicorn/nazicornRight.png");
+        Picture playerOnePicture = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
+        Picture playerTwoPicture = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
 
         String[] playerOneImagePaths = {
                 "resources/Unicorn/unicornLeft.png",
@@ -41,8 +43,8 @@ public class Game {
                 "resources/Nazicorn/nazicornRight.png"
         };
 
-        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths);
-        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths);
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
 
         drawScreen(WIDTH, HEIGHT);
 
@@ -50,12 +52,12 @@ public class Game {
     }
 
     private void drawScreen(int width, int height) {
-        Rectangle screen = new Rectangle(0, 0, width, height);
+        Rectangle screen = new Rectangle(PADDING, PADDING, width, height);
         screen.draw();
     }
 
     private void process() {
-        final int FRAMES_PER_SECOND = 120;
+        final int FRAMES_PER_SECOND = 240;
         final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 
         long nextGameTick = System.currentTimeMillis();
@@ -83,11 +85,19 @@ public class Game {
     private void updateGame() {
         for (Player player : players) {
             player.move();
-            player.updateProjectile();
+            player.shoot();
+
+            for (Projectile projectile : player.getProjectilesList()) {
+                projectile.move();
+            }
         }
     }
 
     private void render() {
 
+    }
+
+    public static Player[] getPlayers() {
+        return players;
     }
 }

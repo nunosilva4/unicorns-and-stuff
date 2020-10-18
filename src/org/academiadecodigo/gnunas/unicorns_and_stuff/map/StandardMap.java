@@ -5,6 +5,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class StandardMap implements Map {
@@ -14,7 +15,7 @@ public class StandardMap implements Map {
     private int numberOfObjects;
 
     public StandardMap(Player[] players, int numberOfObjects) {
-        picture = new Picture(0, 0, "resources/background.jpg");
+        picture = new Picture(Game.PADDING, Game.PADDING, "resources/rsz_cenas.png");
         picture.draw();
         this.numberOfObjects = numberOfObjects;
 
@@ -28,5 +29,4 @@ public class StandardMap implements Map {
             }
         }
     }
-
 }

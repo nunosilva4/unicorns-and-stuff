@@ -1,5 +1,6 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
+import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
@@ -12,10 +13,14 @@ public class Handler implements KeyboardHandler {
 
     private static Set<Direction> playerOneMovement;
     private static Set<Direction> playerTwoMovement;
+    private static Set<Boolean> playerOneShooting;
+    private static Set<Boolean> playerTwoShooting;
 
     public Handler() {
         playerOneMovement = new LinkedHashSet<>();
         playerTwoMovement = new LinkedHashSet<>();
+        playerOneShooting = new LinkedHashSet<>();
+        playerTwoShooting = new LinkedHashSet<>();
     }
 
     // TODO add two shoot keys to call player method shoot and add delay!!
@@ -23,6 +28,9 @@ public class Handler implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()) {
+            case KEY_L:
+                playerOneShooting.add(true);
+                break;
             case KEY_UP:
                 playerOneMovement.add(Direction.UP);
                 break;
@@ -47,12 +55,18 @@ public class Handler implements KeyboardHandler {
             case KEY_D:
                 playerTwoMovement.add(Direction.RIGHT);
                 break;
+            case KEY_SPACE:
+                playerTwoShooting.add(true);
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
         switch (keyboardEvent.getKey()) {
+            case KEY_L:
+                playerOneShooting.clear();
+                break;
             case KEY_UP:
                 playerOneMovement.remove(Direction.UP);
                 break;
@@ -76,6 +90,8 @@ public class Handler implements KeyboardHandler {
                 break;
             case KEY_D:
                 playerTwoMovement.remove(Direction.RIGHT);
+            case KEY_SPACE:
+                playerTwoShooting.clear();
         }
     }
 
@@ -85,5 +101,13 @@ public class Handler implements KeyboardHandler {
 
     public static Set<Direction> getPlayerTwoMovement() {
         return playerTwoMovement;
+    }
+
+    public static Set<Boolean> getPlayerOneShooting() {
+        return playerOneShooting;
+    }
+
+    public static Set<Boolean> getPlayerTwoShooting() {
+        return playerTwoShooting;
     }
 }
