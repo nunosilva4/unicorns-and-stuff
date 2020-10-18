@@ -40,8 +40,8 @@ public class Game {
                 "resources/Nazicorn/nazicornRight.png"
         };
 
-        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths);
-        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths);
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
 
         drawScreen(WIDTH, HEIGHT);
 
@@ -82,6 +82,7 @@ public class Game {
     private void updateGame() {
         for (Player player : players) {
             player.move();
+            player.shoot();
 
             for (Projectile projectile : player.getProjectilesList()) {
                 projectile.move();

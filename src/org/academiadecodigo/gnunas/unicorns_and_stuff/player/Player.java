@@ -1,29 +1,26 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
-import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapCollision;
-import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class Player {
 
     private String name;
     private Set<Direction> movement;
     private Direction lastDirection;
-
     private Picture currentSprite;
     private String[] imagePath;
     private int health = 100;
+    private Set<Boolean> shooting;
 
-    private final LinkedList<Projectile> projectiles;
+    private List<Projectile> projectiles;
 
-    public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath) {
+    public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath, Set<Boolean> shooting) {
         this.name = name;
+        this.shooting = shooting;
         this.movement = movement;
         if (this.name.equals("Unicorn")) {
             this.lastDirection = Direction.LEFT;
@@ -132,14 +129,15 @@ public class Player {
     }
 
     public void shoot() {
-        if (!projectiles.isEmpty()){
-            return;
+        if (shooting != null && shooting.contains(true)) {
+            if (!projectiles.isEmpty()) {
+                return;
+            }
+            projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
         }
-        projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
     }
 
-
-    public LinkedList<Projectile> getProjectilesList() {
+    public List<Projectile> getProjectilesList() {
         return projectiles;
     }
 

@@ -4,7 +4,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class Projectile {
     private Ellipse projectileSprite;
@@ -17,19 +17,19 @@ public class Projectile {
     public Projectile(int x, int y, int damageAmount, Direction direction, Player player) {
         this.damageAmount = damageAmount;
         this.direction = direction;
-        projectileSprite = new Ellipse(x, y, 15, 15);
-        projectileSpeed = 3;
+        projectileSprite = new Ellipse(x, y, 17, 17);
+        projectileSpeed = 4;
         this.player = player;
         projectileSprite.fill();
     }
 
     // TODO add different velocity
     public void move() {
-        if (getX() + (getWidth() / 2) >= Game.WIDTH - Game.PADDING || getX() <= Game.PADDING) {
+        if (getX() + getWidth() >= Game.WIDTH || getX() <= Game.PADDING) {
             remove(player.getProjectilesList());
         }
 
-        if (getY() - (getHeight() / 2) >= Game.HEIGHT - Game.PADDING || getY() <= Game.PADDING) {
+        if (getY() + getHeight() >= Game.HEIGHT || getY() <= Game.PADDING) {
             remove(player.getProjectilesList());
         }
 
@@ -58,9 +58,9 @@ public class Projectile {
     }
 
     // TODO Erase from memory
-    public void remove(LinkedList<Projectile> projectiles) {
-        projectiles.remove(this);
+    public void remove(List<Projectile> projectiles) {
         projectileSprite.delete();
+        projectiles.remove(this);
     }
 
     public int getX() {
