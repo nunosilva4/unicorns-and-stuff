@@ -9,14 +9,12 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class GameObject {
 
-    private Rectangle rectangle;
-    private MapType mapType;
-    private Player[] players;
+    private final Rectangle rectangle;
+    private final Player[] players;
 
-    public GameObject(int x, int y, MapType mapType, Player[] players) {
+    public GameObject(int x, int y, Player[] players) {
         rectangle = new Rectangle(x, y, 25, 25);
 
-        this.mapType = mapType;
         this.players = players;
     }
 
