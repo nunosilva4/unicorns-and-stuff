@@ -23,13 +23,12 @@ public class Projectile {
         projectileSprite.fill();
     }
 
-    // TODO add different velocity
     public void move() {
-        if (getX() + getWidth() >= Game.WIDTH || getX() <= Game.PADDING) {
+        if (hitsX()) {
             remove(player.getProjectilesList());
         }
 
-        if (getY() + getHeight() >= Game.HEIGHT || getY() <= Game.PADDING) {
+        if (hitsY()) {
             remove(player.getProjectilesList());
         }
 
@@ -81,5 +80,13 @@ public class Projectile {
 
     public int getDamageAmount() {
         return damageAmount;
+    }
+
+    private boolean hitsY() {
+       return getY() + getHeight() >= Game.HEIGHT || getY() <= Game.PADDING;
+    }
+
+    private boolean hitsX() {
+       return getX() + getWidth() >= Game.WIDTH || getX() <= Game.PADDING;
     }
 }

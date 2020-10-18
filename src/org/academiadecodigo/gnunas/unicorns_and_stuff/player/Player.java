@@ -129,8 +129,8 @@ public class Player {
     }
 
     public void shoot() {
-        if (shooting != null && shooting.contains(true)) {
-            if (!projectiles.isEmpty()) {
+        if (playerIsShooting()) {
+            if (cantShoot()) {
                 return;
             }
             projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
@@ -155,5 +155,13 @@ public class Player {
 
     public int getHeight() {
         return currentSprite.getHeight();
+    }
+
+    private boolean playerIsShooting() {
+        return shooting.contains(true);
+    }
+
+    private boolean cantShoot() {
+        return !projectiles.isEmpty();
     }
 }

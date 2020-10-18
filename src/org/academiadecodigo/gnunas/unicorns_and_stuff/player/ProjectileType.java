@@ -5,14 +5,14 @@ public enum ProjectileType {
     BADDIE("resources/attacks/pixil-frame-0 (13).png"),
     FRIENDLY("resources/attacks/pixil-frame-0 (13).png");
 
-    private String image;
+    private String imagePath;
 
-    ProjectileType(String image) {
-        this.image = image;
+    ProjectileType(String imagePath) {
+        this.imagePath = imagePath;
     }
 
-    public String getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
 }
