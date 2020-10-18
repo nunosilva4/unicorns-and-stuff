@@ -63,21 +63,25 @@ public class Player {
 
         if(movement.contains(Direction.UP) && movement.contains(Direction.LEFT)){
             currentSprite.translate(-1, -1);
+            currentSprite.load(imagePath[0]);
             return;
         }
 
         if(movement.contains(Direction.UP) && movement.contains(Direction.RIGHT)){
             currentSprite.translate(1, -1);
+            currentSprite.load(imagePath[1]);
             return;
         }
 
         if(movement.contains(Direction.DOWN) && movement.contains(Direction.LEFT)){
             currentSprite.translate(-1, 1);
+            currentSprite.load(imagePath[0]);
             return;
         }
 
         if(movement.contains(Direction.DOWN) && movement.contains(Direction.RIGHT)){
             currentSprite.translate(1, 1);
+            currentSprite.load(imagePath[1]);
             return;
         }
 
@@ -109,6 +113,12 @@ public class Player {
     public void updateProjectile() {
         for (Projectile projectile : projectiles) {
             if(projectile.getX() >= Game.WIDTH || projectile.getX() <= 0) {
+                projectiles.remove(projectile);
+                projectile.remove();
+                continue;
+            }
+
+            if(projectile.getY() >= Game.HEIGHT || projectile.getY() <= 0){
                 projectiles.remove(projectile);
                 projectile.remove();
                 continue;
