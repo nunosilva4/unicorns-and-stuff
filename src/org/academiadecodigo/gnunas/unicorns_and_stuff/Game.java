@@ -12,11 +12,16 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Game {
 
     private Map map;
 
     private static Player[] players;
+
+    private List<GameObject> stuffList;
 
     public static final int WIDTH = 1024;
 
@@ -26,7 +31,9 @@ public class Game {
 
     public Game(MapType mapType) {
 
-        map = MapFactory.makeMap(mapType, players);
+        map = MapFactory.makeMap(mapType);
+
+        stuffList = new LinkedList<>();
 
         players = new Player[2];
 
@@ -90,6 +97,12 @@ public class Game {
             for (Projectile projectile : player.getProjectilesList()) {
                 projectile.move();
             }
+        }
+
+        GameObject gameObject = StuffFactory.createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - PADDING), (int) (Math.random() * Game.HEIGHT - PADDING), players);
+        if (gameObject != null) {
+            gameObject.show();
+            stuffList.add(gameObject);
         }
     }
 
