@@ -12,7 +12,7 @@ public class Game {
 
     private Map map;
 
-    private Player[] players;
+    private static Player[] players;
 
     public static final int WIDTH = 1024;
 
@@ -88,5 +88,9 @@ public class Game {
 
     private void render() {
 
+    }
+
+    public static Player[] getPlayers() {
+        return players;
     }
 }

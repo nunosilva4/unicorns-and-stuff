@@ -12,9 +12,7 @@ import java.util.Set;
 
 public class Player {
 
-    //Trying out stuff
     private String name;
-
     private Set<Direction> movement;
     private Direction lastDirection;
 
@@ -27,20 +25,16 @@ public class Player {
 
     public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath) {
         this.name = name;
-
         this.movement = movement;
-        if (this.name == "Unicorn") {
+        if (this.name.equals("Unicorn")) {
             this.lastDirection = Direction.LEFT;
         }
-        if (this.name == "Nazicorn") {
+        if (this.name.equals("Nazicorn")) {
             this.lastDirection = Direction.RIGHT;
         }
-
         projectiles = new LinkedList<>();
-
         this.imagePath = imagePath;
         currentSprite = startingSprite;
-
         currentSprite.draw();
     }
 
@@ -104,18 +98,21 @@ public class Player {
 
         switch (direction) {
             case UP:
+                lastDirection = Direction.UP;
                 if (MapCollision.hittingTop(this)) {
                     break;
                 }
                 currentSprite.translate(0, -1);
                 break;
             case DOWN:
+                lastDirection = Direction.DOWN;
                 if (MapCollision.hittingBottom(this)) {
                     break;
                 }
                 currentSprite.translate(0, 1);
                 break;
             case LEFT:
+                lastDirection = Direction.LEFT;
                 if (MapCollision.hittingLeft(this)) {
                     break;
                 }
@@ -123,6 +120,7 @@ public class Player {
                 currentSprite.load(imagePath[0]);
                 break;
             case RIGHT:
+                lastDirection = Direction.RIGHT;
                 if (MapCollision.hittingRight(this)) {
                     break;
                 }
@@ -135,24 +133,26 @@ public class Player {
     }
 
     public void shoot() {
+        if (!projectiles.isEmpty()){
+            return;
+        }
         projectiles.add(new Projectile(getX(), getY(), 10, lastDirection));
     }
 
     //TODO Understand what would be the best place for this method, change to Game class?
     public void updateProjectile() {
         for (Projectile projectile : projectiles) {
-            if (projectile.getX() >= Game.WIDTH || projectile.getX() <= Game.PADDING) {
-                projectiles.remove(projectile);
+
+            if (projectile.getX() >= Game.WIDTH + Game.PADDING || projectile.getX() <= Game.PADDING) {
                 projectile.remove();
+                projectiles.remove(projectile);
                 continue;
             }
-
-            if (projectile.getY() >= Game.HEIGHT || projectile.getY() <= Game.PADDING) {
-                projectiles.remove(projectile);
+            if (projectile.getY() >= Game.HEIGHT + Game.PADDING || projectile.getY() <= Game.PADDING) {
                 projectile.remove();
+                projectiles.remove(projectile);
                 continue;
             }
-
             projectile.move();
         }
     }

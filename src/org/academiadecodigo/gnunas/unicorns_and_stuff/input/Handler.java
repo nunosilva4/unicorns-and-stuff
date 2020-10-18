@@ -1,5 +1,6 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
+import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
@@ -35,6 +36,9 @@ public class Handler implements KeyboardHandler {
             case KEY_RIGHT:
                 playerOneMovement.add(Direction.RIGHT);
                 break;
+            case KEY_L:
+                Game.getPlayers()[0].shoot();
+                break;
             case KEY_W:
                 playerTwoMovement.add(Direction.UP);
                 break;
@@ -46,6 +50,9 @@ public class Handler implements KeyboardHandler {
                 break;
             case KEY_D:
                 playerTwoMovement.add(Direction.RIGHT);
+                break;
+            case KEY_C:
+                Game.getPlayers()[1].shoot();
                 break;
         }
     }

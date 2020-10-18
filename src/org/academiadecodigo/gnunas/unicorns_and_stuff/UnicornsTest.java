@@ -22,6 +22,7 @@ public class UnicornsTest {
         KeyboardEvent playerOneDeleteDown = new KeyboardEvent();
         KeyboardEvent playerOneDeleteLeft = new KeyboardEvent();
         KeyboardEvent playerOneDeleteRight = new KeyboardEvent();
+        KeyboardEvent playerOneShoot = new KeyboardEvent();
         //Player Two Events
         KeyboardEvent playerTwoGoUp = new KeyboardEvent();
         KeyboardEvent playerTwoGoDown = new KeyboardEvent();
@@ -31,8 +32,13 @@ public class UnicornsTest {
         KeyboardEvent playerTwoDeleteDown = new KeyboardEvent();
         KeyboardEvent playerTwoDeleteLeft = new KeyboardEvent();
         KeyboardEvent playerTwoDeleteRight = new KeyboardEvent();
+        KeyboardEvent playerTwoShoot = new KeyboardEvent();
 
         //Player One
+        //SHOOT
+        playerOneShoot.setKey(KeyboardEvent.KEY_L);
+        playerOneShoot.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerOneShoot);
         //UP
         playerOneGoUp.setKey(KeyboardEvent.KEY_UP);
         playerOneGoUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -62,6 +68,10 @@ public class UnicornsTest {
         playerOneDeleteRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         keyboard.addEventListener(playerOneDeleteRight);
         //Player Two
+        //SHOOT
+        playerTwoShoot.setKey(KeyboardEvent.KEY_C);
+        playerTwoShoot.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(playerTwoShoot);
         //UP
         playerTwoGoUp.setKey(KeyboardEvent.KEY_W);
         playerTwoGoUp.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);

@@ -9,13 +9,15 @@ public class Projectile {
     private int y;
     private int damageAmount;
     private Direction direction;
+    private int projectileSpeed;
 
     public Projectile(int x, int y, int damageAmount, Direction direction) {
         this.x = x;
         this.y = y;
         this.damageAmount = damageAmount;
         this.direction = direction;
-        projectile = new Ellipse(x, y, 10, 10);
+        projectile = new Ellipse(x, y, 15, 15);
+        projectileSpeed = 3;
 
         projectile.fill();
     }
@@ -24,16 +26,24 @@ public class Projectile {
     public void move() {
         switch (direction) {
             case UP:
-                projectile.translate(0, -1);
+                for (int i = 0; i < projectileSpeed; i++) {
+                    projectile.translate(0, -1);
+                }
                 break;
             case DOWN:
-                projectile.translate(0, 1);
+                for (int i = 0; i < projectileSpeed; i++) {
+                    projectile.translate(0, 1);
+                }
                 break;
             case LEFT:
-                projectile.translate(-1, 0);
+                for (int i = 0; i < projectileSpeed; i++) {
+                    projectile.translate(-1, 0);
+                }
                 break;
             case RIGHT:
-                projectile.translate(1, 0);
+                for (int i = 0; i < projectileSpeed; i++) {
+                    projectile.translate(1, 0);
+                }
                 break;
         }
     }
