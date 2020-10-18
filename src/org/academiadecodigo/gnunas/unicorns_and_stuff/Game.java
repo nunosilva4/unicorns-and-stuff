@@ -5,6 +5,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -19,7 +20,6 @@ public class Game {
     public static final int HEIGHT = 610;
 
     public static final int PADDING = 10;
-
 
     public Game(MapType mapType) {
 
@@ -82,7 +82,10 @@ public class Game {
     private void updateGame() {
         for (Player player : players) {
             player.move();
-            player.updateProjectile();
+
+            for (Projectile projectile : player.getProjectilesList()) {
+                projectile.move();
+            }
         }
     }
 
