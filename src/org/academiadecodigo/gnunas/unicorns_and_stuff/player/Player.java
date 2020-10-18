@@ -2,6 +2,7 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapCollision;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -28,8 +29,12 @@ public class Player {
         this.name = name;
 
         this.movement = movement;
-        if (this.name == "Unicorn") {this.lastDirection = Direction.LEFT;}
-        if (this.name == "Nazicorn") {this.lastDirection = Direction.RIGHT;}
+        if (this.name == "Unicorn") {
+            this.lastDirection = Direction.LEFT;
+        }
+        if (this.name == "Nazicorn") {
+            this.lastDirection = Direction.RIGHT;
+        }
 
         projectiles = new LinkedList<>();
 
@@ -39,12 +44,12 @@ public class Player {
         currentSprite.draw();
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return health <= 0;
     }
 
-    public void hit(int damage){
-        if (health > 0){
+    public void hit(int damage) {
+        if (health > 0) {
             health = health - damage;
         }
     }
@@ -61,25 +66,37 @@ public class Player {
             return;
         }
 
-        if(movement.contains(Direction.UP) && movement.contains(Direction.LEFT)){
+        if (movement.contains(Direction.UP) && movement.contains(Direction.LEFT)) {
+            if (MapCollision.hittingLeft(this) || MapCollision.hittingTop(this)) {
+                return;
+            }
             currentSprite.translate(-1, -1);
             currentSprite.load(imagePath[0]);
             return;
         }
 
-        if(movement.contains(Direction.UP) && movement.contains(Direction.RIGHT)){
+        if (movement.contains(Direction.UP) && movement.contains(Direction.RIGHT)) {
+            if (MapCollision.hittingRight(this) || MapCollision.hittingTop(this)) {
+                return;
+            }
             currentSprite.translate(1, -1);
             currentSprite.load(imagePath[1]);
             return;
         }
 
-        if(movement.contains(Direction.DOWN) && movement.contains(Direction.LEFT)){
+        if (movement.contains(Direction.DOWN) && movement.contains(Direction.LEFT)) {
+            if (MapCollision.hittingLeft(this) || MapCollision.hittingBottom(this)) {
+                return;
+            }
             currentSprite.translate(-1, 1);
             currentSprite.load(imagePath[0]);
             return;
         }
 
-        if(movement.contains(Direction.DOWN) && movement.contains(Direction.RIGHT)){
+        if (movement.contains(Direction.DOWN) && movement.contains(Direction.RIGHT)) {
+            if (MapCollision.hittingRight(this) || MapCollision.hittingBottom(this)) {
+                return;
+            }
             currentSprite.translate(1, 1);
             currentSprite.load(imagePath[1]);
             return;
@@ -87,16 +104,28 @@ public class Player {
 
         switch (direction) {
             case UP:
+                if (MapCollision.hittingTop(this)) {
+                    break;
+                }
                 currentSprite.translate(0, -1);
                 break;
             case DOWN:
+                if (MapCollision.hittingBottom(this)) {
+                    break;
+                }
                 currentSprite.translate(0, 1);
                 break;
             case LEFT:
+                if (MapCollision.hittingLeft(this)) {
+                    break;
+                }
                 currentSprite.translate(-1, 0);
                 currentSprite.load(imagePath[0]);
                 break;
             case RIGHT:
+                if (MapCollision.hittingRight(this)) {
+                    break;
+                }
                 currentSprite.translate(1, 0);
                 currentSprite.load(imagePath[1]);
                 break;
@@ -112,13 +141,13 @@ public class Player {
     //TODO Understand what would be the best place for this method, change to Game class?
     public void updateProjectile() {
         for (Projectile projectile : projectiles) {
-            if(projectile.getX() >= Game.WIDTH || projectile.getX() <= 0) {
+            if (projectile.getX() >= Game.WIDTH || projectile.getX() <= Game.PADDING) {
                 projectiles.remove(projectile);
                 projectile.remove();
                 continue;
             }
 
-            if(projectile.getY() >= Game.HEIGHT || projectile.getY() <= 0){
+            if (projectile.getY() >= Game.HEIGHT || projectile.getY() <= Game.PADDING) {
                 projectiles.remove(projectile);
                 projectile.remove();
                 continue;
@@ -135,4 +164,13 @@ public class Player {
     public int getY() {
         return currentSprite.getY() + currentSprite.getHeight() / 2;
     }
+
+    public int getHeight() {
+        return currentSprite.getHeight();
+    }
+
+    public int getWidth() {
+        return currentSprite.getWidth();
+    }
+
 }
