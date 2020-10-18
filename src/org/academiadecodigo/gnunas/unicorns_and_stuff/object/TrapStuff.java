@@ -9,8 +9,8 @@ public class TrapStuff extends GameObject {
 
     private final int DAMAGE = 10;
 
-    public TrapStuff(int x, int y, MapType mapType, Player[] players) {
-        super(x, y, mapType, players);
+    public TrapStuff(int x, int y, Player[] players) {
+        super(x, y, players);
     }
 
     public void hit() {
