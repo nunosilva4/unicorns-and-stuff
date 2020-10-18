@@ -18,12 +18,11 @@ public class Player {
     private Set<Direction> movement;
     private Direction lastDirection;
 
-    // TODO change to Game class?
-    private LinkedList<Projectile> projectiles;
-
     private Picture currentSprite;
     private String[] imagePath;
     private int health = 100;
+
+    private final LinkedList<Projectile> projectiles;
 
     public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath) {
         this.name = name;
@@ -135,26 +134,11 @@ public class Player {
     }
 
     public void shoot() {
-        projectiles.add(new Projectile(getX(), getY(), 10, lastDirection));
+        projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
     }
 
-    //TODO Understand what would be the best place for this method, change to Game class?
-    public void updateProjectile() {
-        for (Projectile projectile : projectiles) {
-            if (projectile.getX() >= Game.WIDTH || projectile.getX() <= Game.PADDING) {
-                projectiles.remove(projectile);
-                projectile.remove();
-                continue;
-            }
-
-            if (projectile.getY() >= Game.HEIGHT || projectile.getY() <= Game.PADDING) {
-                projectiles.remove(projectile);
-                projectile.remove();
-                continue;
-            }
-
-            projectile.move();
-        }
+    public LinkedList<Projectile> getProjectilesList() {
+        return projectiles;
     }
 
     public int getX() {
@@ -165,12 +149,11 @@ public class Player {
         return currentSprite.getY() + currentSprite.getHeight() / 2;
     }
 
-    public int getHeight() {
-        return currentSprite.getHeight();
-    }
-
     public int getWidth() {
         return currentSprite.getWidth();
     }
 
+    public int getHeight() {
+        return currentSprite.getHeight();
+    }
 }
