@@ -18,6 +18,8 @@ public abstract class GameObject {
         rectangle = new Rectangle(x, y, 25, 25);
     }
 
+    public abstract void check();
+
     public void show() {
         rectangle.fill();
     }
