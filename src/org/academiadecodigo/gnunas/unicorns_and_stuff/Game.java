@@ -6,10 +6,8 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -29,7 +27,7 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer timer;
+    private final Timer createStuffTimer;
 
     public Game(MapType mapType) {
 
@@ -55,8 +53,8 @@ public class Game {
         players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
 
-        timer = new Timer();
-        timer.schedule(new StuffFactory(), 1000, 1000);
+        createStuffTimer = new Timer();
+        createStuffTimer.schedule(new StuffFactory(), 1000, 1000);
 
         drawScreen();
 
