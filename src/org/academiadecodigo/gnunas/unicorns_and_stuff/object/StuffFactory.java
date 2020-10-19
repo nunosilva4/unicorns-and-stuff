@@ -1,20 +1,17 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 
+import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 
-public class StuffFactory {
+import java.util.LinkedList;
+import java.util.TimerTask;
 
-    public static final int MAXSTUFF = 10;
-    private static int currentNumberOfStuff;
+public class StuffFactory extends TimerTask {
+
+    private static int NUMBEROFMAXSTUFF = 2;
+    private static int CURRENTNUMBEROFSTUFF = 0;
 
     public static GameObject createNewStuff(StuffType stuffType, int x, int y, Player[] players) {
-
-        if (currentNumberOfStuff >= MAXSTUFF) {
-            return null;
-        }
-
-        currentNumberOfStuff++;
-
         switch (stuffType) {
             case TRAP:
                 return new TrapStuff(x, y, players);
@@ -24,7 +21,28 @@ public class StuffFactory {
                 break;
         }
 
-
         return null;
+    }
+
+    @Override
+    public void run() {
+        if (CURRENTNUMBEROFSTUFF >= NUMBEROFMAXSTUFF) {
+            CURRENTNUMBEROFSTUFF--;
+
+            for (GameObject stuffList: Game.getStuffList()) {
+                stuffList.delete();
+                Game.getStuffList().remove(stuffList);
+                break;
+            }
+
+            return;
+        }
+
+        GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - Game.PADDING), (int) (Math.random() * Game.HEIGHT - Game.PADDING), Game.getPlayers());
+        if (gameObject != null) {
+            gameObject.show();
+            Game.getStuffList().add(gameObject);
+            CURRENTNUMBEROFSTUFF++;
+        }
     }
 }
