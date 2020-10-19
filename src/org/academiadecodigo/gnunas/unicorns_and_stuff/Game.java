@@ -6,12 +6,15 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.*;
+
+import static org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory.createNewStuff;
 
 public class Game {
 
@@ -54,7 +57,7 @@ public class Game {
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
 
         createStuffTimer = new Timer();
-        createStuffTimer.schedule(new StuffFactory(), 1000, 1000);
+        createStuffTimer.schedule(createStuff(), 1000, 1000);
 
         drawScreen();
 
@@ -94,6 +97,10 @@ public class Game {
     }
 
     private void updateGame() {
+        for (GameObject gameObject : stuffList) {
+            gameObject.check();
+        }
+
         for (Player player : players) {
             player.move();
             player.shoot();
@@ -118,11 +125,34 @@ public class Game {
 
     }
 
-    public static Player[] getPlayers() {
-        return players;
+    private TimerTask createStuff() {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                if (StuffFactory.CURRENTNUMBEROFSTUFF >= StuffFactory.NUMBEROFMAXSTUFF) {
+                    StuffFactory.CURRENTNUMBEROFSTUFF--;
+
+                    for (GameObject stuff : stuffList) {
+                        stuff.delete();
+                        stuffList.remove(stuff);
+                        break;
+                    }
+
+                    return;
+                }
+
+                GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - Game.PADDING),
+                        (int) (Math.random() * Game.HEIGHT - Game.PADDING));
+                if (gameObject != null) {
+                    gameObject.show();
+                    stuffList.add(gameObject);
+                    StuffFactory.CURRENTNUMBEROFSTUFF++;
+                }
+            }
+        };
     }
 
-    public static List<GameObject> getStuffList() {
-        return stuffList;
+    public static Player[] getPlayers() {
+        return players;
     }
 }
