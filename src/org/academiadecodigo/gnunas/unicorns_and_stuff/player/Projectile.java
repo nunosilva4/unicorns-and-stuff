@@ -23,15 +23,15 @@ public class Projectile {
     }
 
     public boolean isHitting(Player player) {
-        int playerBodyMaxX = player.getX() + player.getWidth();
-        int playerBodyMinX = player.getX();
-        int playerBodyMaxY = player.getY() + player.getHeight();
-        int playerBodyMinY = player.getY();
+        int playerBodyMaxX = player.getX() + player.getWidth() / 2;
+        int playerBodyMinX = player.getX() - player.getWidth() / 2;
+        int playerBodyMaxY = player.getY() + player.getHeight() / 2;
+        int playerBodyMinY = player.getY() - player.getHeight() / 2;
 
-        return getX() + (getWidth() / 2) + Game.PADDING <= playerBodyMaxX &&
-                getX() + (getWidth() / 2) + Game.PADDING >= playerBodyMinX &&
-                getY() + (getHeight() / 2) + Game.PADDING <= playerBodyMaxY &&
-                getY() + (getHeight() / 2) + Game.PADDING >= playerBodyMinY;
+        return (getX() - (getWidth() / 2)) + (getWidth() / 2) + Game.PADDING <= playerBodyMaxX &&
+                (getX() - (getWidth() / 2)) + (getWidth() / 2) + Game.PADDING >= playerBodyMinX &&
+                (getY() - (getHeight() / 2)) + (getHeight() / 2) + Game.PADDING <= playerBodyMaxY &&
+                (getY() - (getHeight() / 2)) + (getHeight() / 2) + Game.PADDING >= playerBodyMinY;
     }
 
     public boolean isDestroyed() {
