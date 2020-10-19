@@ -6,15 +6,15 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import java.util.LinkedList;
 import java.util.TimerTask;
 
-public class StuffFactory extends TimerTask {
+public class StuffFactory {
 
-    private static int NUMBEROFMAXSTUFF = 2;
-    private static int CURRENTNUMBEROFSTUFF = 0;
+    public static final int NUMBEROFMAXSTUFF = 2;
+    public static int CURRENTNUMBEROFSTUFF = 0;
 
-    public static GameObject createNewStuff(StuffType stuffType, int x, int y, Player[] players) {
+    public static GameObject createNewStuff(StuffType stuffType, int x, int y) {
         switch (stuffType) {
             case TRAP:
-                return new TrapStuff(x, y, players);
+                return new TrapStuff(x, y);
             case SHIT:
                 break;
             case METEORS:
@@ -22,27 +22,5 @@ public class StuffFactory extends TimerTask {
         }
 
         return null;
-    }
-
-    @Override
-    public void run() {
-        if (CURRENTNUMBEROFSTUFF >= NUMBEROFMAXSTUFF) {
-            CURRENTNUMBEROFSTUFF--;
-
-            for (GameObject stuffList: Game.getStuffList()) {
-                stuffList.delete();
-                Game.getStuffList().remove(stuffList);
-                break;
-            }
-
-            return;
-        }
-
-        GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - Game.PADDING), (int) (Math.random() * Game.HEIGHT - Game.PADDING), Game.getPlayers());
-        if (gameObject != null) {
-            gameObject.show();
-            Game.getStuffList().add(gameObject);
-            CURRENTNUMBEROFSTUFF++;
-        }
     }
 }
