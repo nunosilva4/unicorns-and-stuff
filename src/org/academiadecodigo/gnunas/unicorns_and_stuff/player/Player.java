@@ -15,6 +15,7 @@ public class Player {
     private String[] imagePath;
     private int health = 100;
     private Set<Boolean> shooting;
+    private boolean dead;
 
     private List<Projectile> projectiles;
 
@@ -35,16 +36,24 @@ public class Player {
     }
 
     public boolean isDead() {
+        if (health <= 0){
+            dead = true;
+        }
         return health <= 0;
     }
 
     public void hit(int damage) {
         if (health > 0) {
             health -= damage;
+            System.out.println("HIT");
         }
     }
 
     public void move() {
+        if (dead) {
+            return;
+        }
+
         Iterator<Direction> iterator = movement.iterator();
         Direction direction = null;
 
@@ -130,7 +139,7 @@ public class Player {
 
     public void shoot() {
         if (playerIsShooting()) {
-            if (cantShoot()) {
+            if (isDead() ||cantShoot()) {
                 return;
             }
             projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
@@ -163,6 +172,10 @@ public class Player {
 
     private boolean cantShoot() {
         return !projectiles.isEmpty();
+    }
+
+    public Picture getCurrentSprite() {
+        return currentSprite;
     }
 
     public int getHealth() {

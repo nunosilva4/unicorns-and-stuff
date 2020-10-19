@@ -4,14 +4,13 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 
-import java.util.List;
-
 public class Projectile {
+
+    private boolean destroyed;
     private Ellipse projectileSprite;
     private int damageAmount;
     private Direction direction;
     private int projectileSpeed;
-
     private Player player;
 
     public Projectile(int x, int y, int damageAmount, Direction direction, Player player) {
@@ -23,13 +22,34 @@ public class Projectile {
         projectileSprite.fill();
     }
 
+    public boolean isHitting(Player player) {
+        int playerBodyMaxX = player.getX() + player.getWidth();
+        int playerBodyMinX = player.getX();
+        int playerBodyMaxY = player.getY() + player.getHeight();
+        int playerBodyMinY = player.getY();
+
+        return getX() + (getWidth() / 2) + Game.PADDING <= playerBodyMaxX &&
+                getX() + (getWidth() / 2) + Game.PADDING >= playerBodyMinX &&
+                getY() + (getHeight() / 2) + Game.PADDING <= playerBodyMaxY &&
+                getY() + (getHeight() / 2) + Game.PADDING >= playerBodyMinY;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
     public void move() {
-        if (hitsX()) {
-            remove(player.getProjectilesList());
+        if (hitsX() || hitsY()) {
+            scheduleRemoval();
+            return;
         }
 
-        if (hitsY()) {
-            remove(player.getProjectilesList());
+        Player opponent = player == Game.getPlayers()[0] ? Game.getPlayers()[1] : Game.getPlayers()[0];
+
+        if (isHitting(opponent)) {
+            opponent.hit(damageAmount);
+            scheduleRemoval();
+            return;
         }
 
         switch (direction) {
@@ -56,16 +76,9 @@ public class Projectile {
         }
     }
 
-    public void hit(Player player) {
-        player.hit(damageAmount);
-
-        remove(player.getProjectilesList());
-    }
-
-    // TODO Erase from memory
-    public void remove(List<Projectile> projectiles) {
+    public void scheduleRemoval() {
         projectileSprite.delete();
-        projectiles.remove(this);
+        destroyed = true;
     }
 
     public int getX() {
@@ -89,10 +102,10 @@ public class Projectile {
     }
 
     private boolean hitsY() {
-       return getY() + getHeight() >= Game.HEIGHT || getY() <= Game.PADDING;
+        return getY() + getHeight() >= Game.HEIGHT || getY() <= Game.PADDING;
     }
 
     private boolean hitsX() {
-       return getX() + getWidth() >= Game.WIDTH || getX() <= Game.PADDING;
+        return getX() + getWidth() >= Game.WIDTH || getX() <= Game.PADDING;
     }
 }

@@ -12,6 +12,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -94,16 +95,26 @@ public class Game {
             player.move();
             player.shoot();
 
-            for (Projectile projectile : player.getProjectilesList()) {
+            Iterator<Projectile> iterator = player.getProjectilesList().iterator();
+
+            while (iterator.hasNext()) {
+                Projectile projectile = iterator.next();
                 projectile.move();
+                if(projectile.isDestroyed()) {
+                    iterator.remove();
+                }
+            }
+
+            if (player.isDead()){
+                player.getCurrentSprite().load("resources/grave.png");
             }
         }
 
-        GameObject gameObject = StuffFactory.createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - PADDING), (int) (Math.random() * Game.HEIGHT - PADDING), players);
+        /*GameObject gameObject = StuffFactory.createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - PADDING), (int) (Math.random() * Game.HEIGHT - PADDING), players);
         if (gameObject != null) {
             gameObject.show();
             stuffList.add(gameObject);
-        }
+        }*/
     }
 
     private void render() {
