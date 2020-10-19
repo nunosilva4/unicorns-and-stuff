@@ -13,9 +13,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Game {
 
@@ -23,13 +21,15 @@ public class Game {
 
     private static Player[] players;
 
-    private List<GameObject> stuffList;
+    private static List<GameObject> stuffList;
 
     public static final int WIDTH = 1024;
 
     public static final int HEIGHT = 610;
 
     public static final int PADDING = 10;
+
+    private final Timer timer;
 
     public Game(MapType mapType) {
 
@@ -55,14 +55,17 @@ public class Game {
         players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
 
-        drawScreen(WIDTH, HEIGHT);
+        timer = new Timer();
+        timer.schedule(new StuffFactory(), 1000, 1000);
+
+        drawScreen();
 
         process();
 
     }
 
-    private void drawScreen(int width, int height) {
-        Rectangle screen = new Rectangle(PADDING, PADDING, width, height);
+    private void drawScreen() {
+        Rectangle screen = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
         screen.draw();
     }
 
@@ -111,12 +114,6 @@ public class Game {
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
-
-        /*GameObject gameObject = StuffFactory.createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - PADDING), (int) (Math.random() * Game.HEIGHT - PADDING), players);
-        if (gameObject != null) {
-            gameObject.show();
-            stuffList.add(gameObject);
-        }*/
     }
 
     private void render() {
@@ -125,5 +122,9 @@ public class Game {
 
     public static Player[] getPlayers() {
         return players;
+    }
+
+    public static List<GameObject> getStuffList() {
+        return stuffList;
     }
 }
