@@ -2,13 +2,24 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
-
+import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 
 public class UnicornsTest {
     public static void main(String[] args) {
+
+        Sound sound = new Sound("/resources/Sound/test.wav");
+        sound.play(true);
+
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         Handler keyBindings = new Handler();
         Keyboard keyboard = new Keyboard(keyBindings);
