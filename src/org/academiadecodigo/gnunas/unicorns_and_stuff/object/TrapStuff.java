@@ -6,14 +6,15 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 
 public class TrapStuff extends GameObject {
 
-    public TrapStuff(int x, int y, Player[] players) {
+    public TrapStuff(int x, int y) {
         super(x, y);
     }
 
-    public void hit() {
+    @Override
+    public void check() {
         for (Player player : Game.getPlayers()) {
             if (isHitting(player)) {
-
+                System.out.println("Object hitting");
                 return;
             }
         }
