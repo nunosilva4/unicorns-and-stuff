@@ -7,6 +7,8 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.TimerTask;
+
 public abstract class GameObject {
 
     private final Rectangle rectangle;
