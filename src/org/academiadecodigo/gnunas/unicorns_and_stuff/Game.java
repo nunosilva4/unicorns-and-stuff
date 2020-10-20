@@ -30,7 +30,7 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer createStuffTimer;
+    private final Timer stuffTimer;
 
     public Game(MapType mapType) {
 
@@ -56,8 +56,9 @@ public class Game {
         players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
 
-        createStuffTimer = new Timer();
-        createStuffTimer.schedule(createStuff(), 1000, 1000);
+        stuffTimer = new Timer();
+        stuffTimer.schedule(createStuff(), 1000, 1000);
+        stuffTimer.schedule(deleteStuff(), 1000, 3000);
 
         drawScreen();
 
@@ -129,27 +130,27 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                if (StuffFactory.CURRENTNUMBEROFSTUFF >= StuffFactory.NUMBEROFMAXSTUFF) {
-                    StuffFactory.CURRENTNUMBEROFSTUFF--;
-
-                    for (GameObject stuff : stuffList) {
-                        stuff.delete();
-                        stuffList.remove(stuff);
-                        break;
-                    }
-
-                    return;
-                }
-
                 GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - Game.PADDING),
                         (int) (Math.random() * Game.HEIGHT - Game.PADDING));
                 if (gameObject != null) {
                     gameObject.show();
                     stuffList.add(gameObject);
-                    StuffFactory.CURRENTNUMBEROFSTUFF++;
                 }
             }
         };
+    }
+
+    private TimerTask deleteStuff() {
+       return new TimerTask() {
+           @Override
+           public void run() {
+               for (GameObject stuff : stuffList) {
+                   stuff.delete();
+                   stuffList.remove(stuff);
+                   break;
+               }
+           }
+       };
     }
 
     public static Player[] getPlayers() {
