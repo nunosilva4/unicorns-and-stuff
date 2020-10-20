@@ -10,6 +10,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 
 import java.util.*;
 
@@ -31,9 +32,19 @@ public class Game {
 
     private final Timer stuffTimer;
 
+    private Text playerOneHpText = new Text(WIDTH - 250, HEIGHT + 20, "Health:");
+    private Text playerTwoHpText = new Text( 150, HEIGHT + 20, "Health:");
+    private Text playerOneHp = new Text(WIDTH - 200 ,HEIGHT + 20, "100");
+    private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
+
     public Game(MapType mapType) {
 
         KeyBindings.init();
+
+        playerOneHp.draw();
+        playerOneHpText.draw();
+        playerTwoHp.draw();
+        playerTwoHpText.draw();
 
         map = MapFactory.makeMap(mapType);
 
@@ -41,8 +52,8 @@ public class Game {
 
         players = new Player[2];
 
-        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting());
-        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting(), this);
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting(), this);
 
         stuffTimer = new Timer();
         stuffTimer.schedule(createStuff(), 1000, 3000);
@@ -73,6 +84,7 @@ public class Game {
             updateGame();
             render();
 
+
             nextGameTick += SKIP_TICKS;
             sleepTime = nextGameTick - System.currentTimeMillis();
             if (sleepTime >= 0) {
@@ -95,6 +107,7 @@ public class Game {
             player.shoot();
 
             Iterator<Projectile> iterator = player.getProjectilesList().iterator();
+
 
             while (iterator.hasNext()) {
                 Projectile projectile = iterator.next();
@@ -147,5 +160,13 @@ public class Game {
 
     public static Player[] getPlayers() {
         return players;
+    }
+
+    public Text getPlayerOneHp() {
+        return playerOneHp;
+    }
+
+    public Text getPlayerTwoHp() {
+        return playerTwoHp;
     }
 }
