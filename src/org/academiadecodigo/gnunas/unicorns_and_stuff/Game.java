@@ -44,8 +44,8 @@ public class Game {
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
 
         stuffTimer = new Timer();
-        stuffTimer.schedule(createStuff(), 1000, 1000);
-        stuffTimer.schedule(deleteStuff(), 1200, 1200);
+        stuffTimer.schedule(createStuff(), 1000, 3000);
+        stuffTimer.schedule(deleteStuff(), 1500, 3500);
 
         drawScreen();
 

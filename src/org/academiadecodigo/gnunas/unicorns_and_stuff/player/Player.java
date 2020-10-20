@@ -27,7 +27,7 @@ public class Player {
         if (this.name.equals("Unicorn")) {
             currentSprite = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
 
-            imagePath = new String[] {
+            imagePath = new String[]{
                     "resources/Unicorn/unicornLeft.png",
                     "resources/Unicorn/unicornRight.png"
             };
@@ -37,7 +37,7 @@ public class Player {
         if (this.name.equals("Nazicorn")) {
             currentSprite = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
 
-            imagePath = new String[] {
+            imagePath = new String[]{
                     "resources/Nazicorn/nazicornLeft.png",
                     "resources/Nazicorn/nazicornRight.png"
             };
