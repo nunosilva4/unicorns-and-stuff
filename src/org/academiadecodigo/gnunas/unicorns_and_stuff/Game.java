@@ -30,7 +30,7 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer createStuffTimer;
+    private final Timer stuffTimer;
 
     public Game(MapType mapType) {
 
@@ -40,24 +40,12 @@ public class Game {
 
         players = new Player[2];
 
-        Picture playerOnePicture = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
-        Picture playerTwoPicture = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting());
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
 
-        String[] playerOneImagePaths = {
-                "resources/Unicorn/unicornLeft.png",
-                "resources/Unicorn/unicornRight.png"
-        };
-
-        String[] playerTwoImagePaths = {
-                "resources/Nazicorn/nazicornLeft.png",
-                "resources/Nazicorn/nazicornRight.png"
-        };
-
-        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
-        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
-
-        createStuffTimer = new Timer();
-        createStuffTimer.schedule(createStuff(), 1000, 1000);
+        stuffTimer = new Timer();
+        stuffTimer.schedule(createStuff(), 1000, 1000);
+        stuffTimer.schedule(deleteStuff(), 1200, 1200);
 
         drawScreen();
 
@@ -129,27 +117,31 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                if (StuffFactory.CURRENTNUMBEROFSTUFF >= StuffFactory.NUMBEROFMAXSTUFF) {
-                    StuffFactory.CURRENTNUMBEROFSTUFF--;
-
-                    for (GameObject stuff : stuffList) {
-                        stuff.delete();
-                        stuffList.remove(stuff);
-                        break;
-                    }
-
-                    return;
-                }
-
-                GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - Game.PADDING),
-                        (int) (Math.random() * Game.HEIGHT - Game.PADDING));
+                GameObject gameObject = createNewStuff(StuffType.TRAP, getRandomNumber(50, WIDTH - 50),
+                        getRandomNumber(50, HEIGHT - 50));
                 if (gameObject != null) {
                     gameObject.show();
                     stuffList.add(gameObject);
-                    StuffFactory.CURRENTNUMBEROFSTUFF++;
                 }
             }
         };
+    }
+
+    private TimerTask deleteStuff() {
+       return new TimerTask() {
+           @Override
+           public void run() {
+               for (GameObject stuff : stuffList) {
+                   stuff.delete();
+                   stuffList.remove(stuff);
+                   break;
+               }
+           }
+       };
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
     public static Player[] getPlayers() {

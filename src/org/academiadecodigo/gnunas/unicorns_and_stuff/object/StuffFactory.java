@@ -8,9 +8,6 @@ import java.util.TimerTask;
 
 public class StuffFactory {
 
-    public static final int NUMBEROFMAXSTUFF = 2;
-    public static int CURRENTNUMBEROFSTUFF = 0;
-
     public static GameObject createNewStuff(StuffType stuffType, int x, int y) {
         switch (stuffType) {
             case TRAP:

@@ -8,35 +8,48 @@ import java.util.*;
 
 public class Player {
 
-    private String name;
-    private Set<Direction> movement;
+    private final String name;
+    private final Set<Direction> movement;
     private Direction lastDirection;
     private Picture currentSprite;
     private String[] imagePath;
     private int health = 100;
-    private Set<Boolean> shooting;
+    private final Set<Boolean> shooting;
     private boolean dead;
 
-    private List<Projectile> projectiles;
+    private final List<Projectile> projectiles;
 
-    public Player(String name, Set<Direction> movement, Picture startingSprite, String[] imagePath, Set<Boolean> shooting) {
+    public Player(String name, Set<Direction> movement, Set<Boolean> shooting) {
+
         this.name = name;
         this.shooting = shooting;
         this.movement = movement;
         if (this.name.equals("Unicorn")) {
+            currentSprite = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
+
+            imagePath = new String[] {
+                    "resources/Unicorn/unicornLeft.png",
+                    "resources/Unicorn/unicornRight.png"
+            };
+
             this.lastDirection = Direction.LEFT;
         }
         if (this.name.equals("Nazicorn")) {
+            currentSprite = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
+
+            imagePath = new String[] {
+                    "resources/Nazicorn/nazicornLeft.png",
+                    "resources/Nazicorn/nazicornRight.png"
+            };
+
             this.lastDirection = Direction.RIGHT;
         }
         projectiles = new LinkedList<>();
-        this.imagePath = imagePath;
-        currentSprite = startingSprite;
         currentSprite.draw();
     }
 
     public boolean isDead() {
-        if (health <= 0){
+        if (health <= 0) {
             dead = true;
         }
         return health <= 0;
@@ -139,7 +152,7 @@ public class Player {
 
     public void shoot() {
         if (playerIsShooting()) {
-            if (isDead() ||cantShoot()) {
+            if (isDead() || cantShoot()) {
                 return;
             }
             projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
