@@ -58,7 +58,7 @@ public class Game {
 
         stuffTimer = new Timer();
         stuffTimer.schedule(createStuff(), 1000, 1000);
-        stuffTimer.schedule(deleteStuff(), 1000, 3000);
+        stuffTimer.schedule(deleteStuff(), 2000, 2000);
 
         drawScreen();
 
@@ -130,8 +130,8 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * Game.WIDTH - Game.PADDING),
-                        (int) (Math.random() * Game.HEIGHT - Game.PADDING));
+                GameObject gameObject = createNewStuff(StuffType.TRAP, (int) (Math.random() * (PADDING + (WIDTH - PADDING))),
+                        (int) (Math.random() * (PADDING + (HEIGHT - PADDING))));
                 if (gameObject != null) {
                     gameObject.show();
                     stuffList.add(gameObject);
