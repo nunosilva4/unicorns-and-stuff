@@ -28,10 +28,10 @@ public class Projectile {
         int playerBodyMaxY = player.getY() + player.getHeight() / 2;
         int playerBodyMinY = player.getY() - player.getHeight() / 2;
 
-        return (getX() - (getWidth() / 2)) + (getWidth() / 2) + Game.PADDING <= playerBodyMaxX &&
-                (getX() - (getWidth() / 2)) + (getWidth() / 2) + Game.PADDING >= playerBodyMinX &&
-                (getY() - (getHeight() / 2)) + (getHeight() / 2) + Game.PADDING <= playerBodyMaxY &&
-                (getY() - (getHeight() / 2)) + (getHeight() / 2) + Game.PADDING >= playerBodyMinY;
+        return getX() + Game.PADDING <= playerBodyMaxX &&
+                getX() + Game.PADDING >= playerBodyMinX &&
+                getY() + Game.PADDING <= playerBodyMaxY &&
+                getY() + Game.PADDING >= playerBodyMinY;
     }
 
     public boolean isDestroyed() {

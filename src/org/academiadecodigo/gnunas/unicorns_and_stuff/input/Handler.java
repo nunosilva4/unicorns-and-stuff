@@ -1,6 +1,5 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
-import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 

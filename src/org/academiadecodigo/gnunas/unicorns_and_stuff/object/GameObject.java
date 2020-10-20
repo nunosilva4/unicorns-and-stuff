@@ -1,14 +1,9 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.TimerTask;
 
 public abstract class GameObject {
 
