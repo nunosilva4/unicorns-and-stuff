@@ -21,7 +21,7 @@ public class Game {
 
     private static Player[] players;
 
-    private static List<GameObject> stuffList;
+    private static LinkedHashMap<GameObject, Player> stuffList;
 
     public static final int WIDTH = 1024;
 
@@ -29,7 +29,7 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer stuffTimer;
+    private Timer stuffTimer;
 
     public Game(MapType mapType) {
 
@@ -37,7 +37,7 @@ public class Game {
 
         map = MapFactory.makeMap(mapType);
 
-        stuffList = new LinkedList<>();
+        stuffList = new LinkedHashMap<>();
 
         players = new Player[2];
 
@@ -45,8 +45,8 @@ public class Game {
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
 
         stuffTimer = new Timer();
-        stuffTimer.schedule(createStuff(), 1000, 3000);
-        stuffTimer.schedule(deleteStuff(), 1500, 3500);
+
+        stuffTimer.scheduleAtFixedRate(createStuff(), 1, 2000);
 
         drawScreen();
 
@@ -86,8 +86,16 @@ public class Game {
     }
 
     private void updateGame() {
-        for (GameObject gameObject : stuffList) {
-            gameObject.check();
+        for (GameObject gameObject : stuffList.keySet()) {
+            if (stuffList.get(gameObject) != null) {
+                continue;
+            }
+
+            Player player = gameObject.check();
+            if (player != null) {
+                player.stunPlayer(true);
+                stuffList.put(gameObject, player);
+            }
         }
 
         for (Player player : players) {
@@ -122,7 +130,9 @@ public class Game {
                         getRandomNumber(50, HEIGHT - 50));
                 if (gameObject != null) {
                     gameObject.show();
-                    stuffList.add(gameObject);
+                    stuffList.put(gameObject, null);
+
+                    stuffTimer.schedule(deleteStuff(), 5000);
                 }
             }
         };
@@ -132,9 +142,15 @@ public class Game {
        return new TimerTask() {
            @Override
            public void run() {
-               for (GameObject stuff : stuffList) {
+               for (GameObject stuff : stuffList.keySet()) {
+                   Player player = stuffList.get(stuff);
+                   if (player != null) {
+                       player.stunPlayer(false);
+                   }
+
                    stuff.delete();
                    stuffList.remove(stuff);
+
                    break;
                }
            }
@@ -147,5 +163,9 @@ public class Game {
 
     public static Player[] getPlayers() {
         return players;
+    }
+
+    public static LinkedHashMap<GameObject, Player> getStuffList() {
+        return stuffList;
     }
 }
