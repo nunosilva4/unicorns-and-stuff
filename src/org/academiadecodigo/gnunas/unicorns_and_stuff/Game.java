@@ -5,6 +5,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyBindings;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.menu.Menu;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
@@ -35,8 +36,13 @@ public class Game {
     private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
     private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
 
+    private Menu menu;
+
+
+
     public Game(MapType mapType) {
 
+        /*menu = new Menu();*/
         start(mapType, 3, 3);
 
     }
@@ -68,7 +74,6 @@ public class Game {
 
         process();
     }
-
 
     private void drawScreen() {
         Rectangle screen = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
@@ -119,7 +124,6 @@ public class Game {
             player.shoot();
 
             Iterator<Projectile> iterator = player.getProjectilesList().iterator();
-
 
             while (iterator.hasNext()) {
                 Projectile projectile = iterator.next();
