@@ -30,7 +30,7 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer stuffTimer;
+    private Timer stuffTimer;
 
     private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
     private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
