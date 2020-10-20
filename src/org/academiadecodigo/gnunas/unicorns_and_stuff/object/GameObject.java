@@ -3,20 +3,29 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public abstract class GameObject {
 
-    private final Rectangle picture;
+    private final Picture picture;
 
-    public GameObject(int x, int y) {
-        picture = new Rectangle(x, y, 25, 25);
+    public GameObject(int x, int y, String string) {
+        picture = new Picture(x, y, string);
     }
 
-    public abstract Player check();
+    public Player check() {
+        for (Player player : Game.getPlayers()) {
+            if (isHitting(player)) {
+                return player;
+            }
+        }
+
+        return null;
+    }
 
     public void show() {
-        picture.fill();
+        picture.draw();
     }
 
     public void delete() {
@@ -50,4 +59,5 @@ public abstract class GameObject {
     public int getWidth() {
         return picture.getWidth();
     }
+
 }
