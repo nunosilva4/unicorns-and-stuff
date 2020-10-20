@@ -8,15 +8,4 @@ public class TrapStuff extends GameObject {
     public TrapStuff(int x, int y) {
         super(x, y, "resources/Objects/trap.png");
     }
-
-    @Override
-    public Player check() {
-        for (Player player : Game.getPlayers()) {
-            if (isHitting(player)) {
-                return player;
-            }
-        }
-
-        return null;
-    }
 }

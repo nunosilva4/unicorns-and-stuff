@@ -15,11 +15,6 @@ public class Meteor extends GameObject {
         super(x, y, "resources/Objects/meteor.png");
     }
 
-    @Override
-    public void check() {
-
-    }
-
     public void hit() {
         for (Player player : Game.getPlayers()) {
             if (!player.isDead()) {

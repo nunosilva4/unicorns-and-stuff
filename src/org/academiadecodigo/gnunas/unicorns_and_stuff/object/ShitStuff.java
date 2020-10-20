@@ -10,13 +10,4 @@ public class ShitStuff extends GameObject {
         super(x, y, "resources/Objects/shit.png");
     }
 
-    @Override
-    public void check() {
-        for (Player player : Game.getPlayers()) {
-            if (isHitting(player)) {
-                System.out.println("Object hitting");
-                return;
-            }
-        }
-    }
 }
