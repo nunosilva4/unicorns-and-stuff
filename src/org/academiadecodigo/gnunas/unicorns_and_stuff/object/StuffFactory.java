@@ -17,7 +17,6 @@ public class StuffFactory {
             case METEORS:
                 return new Meteor(x, y);
         }
-
         return null;
     }
 }

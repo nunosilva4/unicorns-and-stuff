@@ -16,6 +16,7 @@ public class Player {
     private int health = 100;
     private final Set<Boolean> shooting;
     private boolean dead;
+    private boolean stunned;
 
     private final List<Projectile> projectiles;
 
@@ -27,7 +28,7 @@ public class Player {
         if (this.name.equals("Unicorn")) {
             currentSprite = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
 
-            imagePath = new String[] {
+            imagePath = new String[]{
                     "resources/Unicorn/unicornLeft.png",
                     "resources/Unicorn/unicornRight.png"
             };
@@ -37,7 +38,7 @@ public class Player {
         if (this.name.equals("Nazicorn")) {
             currentSprite = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
 
-            imagePath = new String[] {
+            imagePath = new String[]{
                     "resources/Nazicorn/nazicornLeft.png",
                     "resources/Nazicorn/nazicornRight.png"
             };
@@ -45,7 +46,7 @@ public class Player {
             this.lastDirection = Direction.RIGHT;
         }
         projectiles = new LinkedList<>();
-        currentSprite.draw();
+        Objects.requireNonNull(currentSprite).draw();
     }
 
     public boolean isDead() {
@@ -64,6 +65,10 @@ public class Player {
 
     public void move() {
         if (dead) {
+            return;
+        }
+
+        if (stunned) {
             return;
         }
 
@@ -157,6 +162,14 @@ public class Player {
             }
             projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
         }
+    }
+
+    public void stunPlayer(boolean stuck) {
+        this.stunned = stuck;
+    }
+
+    public boolean isStunned() {
+        return stunned;
     }
 
     public List<Projectile> getProjectilesList() {

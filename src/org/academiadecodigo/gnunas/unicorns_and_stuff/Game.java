@@ -1,16 +1,15 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyBindings;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.*;
 
@@ -22,7 +21,7 @@ public class Game {
 
     private static Player[] players;
 
-    private static List<GameObject> stuffList;
+    private static LinkedHashMap<GameObject, Player> stuffList;
 
     public static final int WIDTH = 1024;
 
@@ -30,13 +29,15 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer stuffTimer;
+    private Timer stuffTimer;
 
     public Game(MapType mapType) {
 
+        KeyBindings.init();
+
         map = MapFactory.makeMap(mapType);
 
-        stuffList = new LinkedList<>();
+        stuffList = new LinkedHashMap<>();
 
         players = new Player[2];
 
@@ -44,8 +45,8 @@ public class Game {
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
 
         stuffTimer = new Timer();
-        stuffTimer.schedule(createStuff(), 1000, 1000);
-        stuffTimer.schedule(deleteStuff(), 1200, 1200);
+
+        stuffTimer.scheduleAtFixedRate(createStuff(), 1, 2000);
 
         drawScreen();
 
@@ -64,7 +65,7 @@ public class Game {
 
         long nextGameTick = System.currentTimeMillis();
 
-        long sleepTime = 0;
+        long sleepTime;
 
         boolean gameRunning = true;
 
@@ -85,8 +86,16 @@ public class Game {
     }
 
     private void updateGame() {
-        for (GameObject gameObject : stuffList) {
-            gameObject.check();
+        for (GameObject gameObject : stuffList.keySet()) {
+            if (stuffList.get(gameObject) != null) {
+                continue;
+            }
+
+            Player player = gameObject.check();
+            if (player != null) {
+                player.stunPlayer(true);
+                stuffList.put(gameObject, player);
+            }
         }
 
         for (Player player : players) {
@@ -121,7 +130,9 @@ public class Game {
                         getRandomNumber(50, HEIGHT - 50));
                 if (gameObject != null) {
                     gameObject.show();
-                    stuffList.add(gameObject);
+                    stuffList.put(gameObject, null);
+
+                    stuffTimer.schedule(deleteStuff(), 5000);
                 }
             }
         };
@@ -131,9 +142,15 @@ public class Game {
        return new TimerTask() {
            @Override
            public void run() {
-               for (GameObject stuff : stuffList) {
+               for (GameObject stuff : stuffList.keySet()) {
+                   Player player = stuffList.get(stuff);
+                   if (player != null) {
+                       player.stunPlayer(false);
+                   }
+
                    stuff.delete();
                    stuffList.remove(stuff);
+
                    break;
                }
            }
@@ -146,5 +163,9 @@ public class Game {
 
     public static Player[] getPlayers() {
         return players;
+    }
+
+    public static LinkedHashMap<GameObject, Player> getStuffList() {
+        return stuffList;
     }
 }

@@ -1,31 +1,26 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.TimerTask;
 
 public abstract class GameObject {
 
-    private final Rectangle rectangle;
+    private final Rectangle picture;
 
     public GameObject(int x, int y) {
-        rectangle = new Rectangle(x, y, 25, 25);
+        picture = new Rectangle(x, y, 25, 25);
     }
 
-    public abstract void check();
+    public abstract Player check();
 
     public void show() {
-        rectangle.fill();
+        picture.fill();
     }
 
     public void delete() {
-        rectangle.delete();
+        picture.delete();
     }
 
     public boolean isHitting(Player player) {
@@ -41,19 +36,19 @@ public abstract class GameObject {
     }
 
     public int getX() {
-        return rectangle.getX() + getWidth() / 2;
+        return picture.getX() + getWidth() / 2;
     }
 
     public int getY() {
-        return rectangle.getY() + getHeight() / 2;
+        return picture.getY() + getHeight() / 2;
     }
 
     public int getHeight() {
-        return rectangle.getHeight();
+        return picture.getHeight();
     }
 
     public int getWidth() {
-        return rectangle.getWidth();
+        return picture.getWidth();
     }
 
 }
