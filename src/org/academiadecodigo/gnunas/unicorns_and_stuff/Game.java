@@ -134,6 +134,7 @@ public class Game {
 
                     stuffTimer.schedule(deleteStuff(), 5000);
                 }
+
             }
         };
     }

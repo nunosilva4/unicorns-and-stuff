@@ -15,7 +15,7 @@ public class StuffFactory {
             case SHIT:
                 break;
             case METEORS:
-                return new Meteor(x, y);
+               // return new Meteor(x, y);
         }
         return null;
     }
