@@ -1,16 +1,15 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyBindings;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.*;
 
@@ -33,6 +32,8 @@ public class Game {
     private final Timer stuffTimer;
 
     public Game(MapType mapType) {
+
+        KeyBindings.init();
 
         map = MapFactory.makeMap(mapType);
 
