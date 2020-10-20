@@ -16,6 +16,7 @@ public class Player {
     private int health = 100;
     private final Set<Boolean> shooting;
     private boolean dead;
+    private boolean stunned;
 
     private final List<Projectile> projectiles;
 
@@ -45,7 +46,7 @@ public class Player {
             this.lastDirection = Direction.RIGHT;
         }
         projectiles = new LinkedList<>();
-        currentSprite.draw();
+        Objects.requireNonNull(currentSprite).draw();
     }
 
     public boolean isDead() {
@@ -64,6 +65,10 @@ public class Player {
 
     public void move() {
         if (dead) {
+            return;
+        }
+
+        if (stunned) {
             return;
         }
 
@@ -157,6 +162,14 @@ public class Player {
             }
             projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
         }
+    }
+
+    public void stunPlayer(boolean stuck) {
+        this.stunned = stuck;
+    }
+
+    public boolean isStunned() {
+        return stunned;
     }
 
     public List<Projectile> getProjectilesList() {
