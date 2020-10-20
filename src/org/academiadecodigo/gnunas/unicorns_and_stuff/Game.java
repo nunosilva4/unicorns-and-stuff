@@ -64,7 +64,7 @@ public class Game {
 
         long nextGameTick = System.currentTimeMillis();
 
-        long sleepTime = 0;
+        long sleepTime;
 
         boolean gameRunning = true;
 

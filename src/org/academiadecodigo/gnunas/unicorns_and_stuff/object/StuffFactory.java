@@ -1,11 +1,5 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 
-import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
-
-import java.util.LinkedList;
-import java.util.TimerTask;
-
 public class StuffFactory {
 
     public static GameObject createNewStuff(StuffType stuffType, int x, int y) {
@@ -16,8 +10,9 @@ public class StuffFactory {
                 break;
             case METEORS:
                 break;
+            default:
+                throw new UnsupportedOperationException();
         }
-
         return null;
     }
 }
