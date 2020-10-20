@@ -36,7 +36,7 @@ public class Player {
     }
 
     public boolean isDead() {
-        if (health <= 0){
+        if (health <= 0) {
             dead = true;
         }
         return health <= 0;
@@ -139,7 +139,7 @@ public class Player {
 
     public void shoot() {
         if (playerIsShooting()) {
-            if (isDead() ||cantShoot()) {
+            if (isDead() || cantShoot()) {
                 return;
             }
             projectiles.add(new Projectile(getX(), getY(), 10, lastDirection, this));
