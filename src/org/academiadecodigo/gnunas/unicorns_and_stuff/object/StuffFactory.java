@@ -3,7 +3,7 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 
-import java.util.LinkedList;
+import java.awt.*;
 import java.util.TimerTask;
 
 public class StuffFactory {
@@ -18,7 +18,7 @@ public class StuffFactory {
             case SHIT:
                 break;
             case METEORS:
-                break;
+                return new Meteor(x, y);
         }
 
         return null;

@@ -55,4 +55,5 @@ public abstract class GameObject {
     public int getWidth() {
         return rectangle.getWidth();
     }
+
 }
