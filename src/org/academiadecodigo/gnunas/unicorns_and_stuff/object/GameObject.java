@@ -3,24 +3,33 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public abstract class GameObject {
 
-    private final Rectangle rectangle;
+    private final Picture picture;
 
-    public GameObject(int x, int y) {
-        rectangle = new Rectangle(x, y, 25, 25);
+    public GameObject(int x, int y, String string) {
+        picture = new Picture(x, y, string);
     }
 
-    public abstract void check();
+    public Player check() {
+        for (Player player : Game.getPlayers()) {
+            if (isHitting(player)) {
+                return player;
+            }
+        }
+
+        return null;
+    }
 
     public void show() {
-        rectangle.fill();
+        picture.draw();
     }
 
     public void delete() {
-        rectangle.delete();
+        picture.delete();
     }
 
     public boolean isHitting(Player player) {
@@ -36,19 +45,19 @@ public abstract class GameObject {
     }
 
     public int getX() {
-        return rectangle.getX() + getWidth() / 2;
+        return picture.getX() + getWidth() / 2;
     }
 
     public int getY() {
-        return rectangle.getY() + getHeight() / 2;
+        return picture.getY() + getHeight() / 2;
     }
 
     public int getHeight() {
-        return rectangle.getHeight();
+        return picture.getHeight();
     }
 
     public int getWidth() {
-        return rectangle.getWidth();
+        return picture.getWidth();
     }
 
 }
