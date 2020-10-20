@@ -10,12 +10,13 @@ public class TrapStuff extends GameObject {
     }
 
     @Override
-    public void check() {
+    public Player check() {
         for (Player player : Game.getPlayers()) {
             if (isHitting(player)) {
-                System.out.println("Object hitting");
-                return;
+                return player;
             }
         }
+
+        return null;
     }
 }
