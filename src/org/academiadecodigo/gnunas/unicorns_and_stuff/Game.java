@@ -130,8 +130,8 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                GameObject gameObject = createNewStuff(StuffType.TRAP, getRandomNumber(100, WIDTH - 100),
-                        getRandomNumber(100, HEIGHT - 100));
+                GameObject gameObject = createNewStuff(StuffType.TRAP, getRandomNumber(50, WIDTH - 50),
+                        getRandomNumber(50, HEIGHT - 50));
                 if (gameObject != null) {
                     gameObject.show();
                     stuffList.add(gameObject);
