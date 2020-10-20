@@ -40,21 +40,8 @@ public class Game {
 
         players = new Player[2];
 
-        Picture playerOnePicture = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
-        Picture playerTwoPicture = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
-
-        String[] playerOneImagePaths = {
-                "resources/Unicorn/unicornLeft.png",
-                "resources/Unicorn/unicornRight.png"
-        };
-
-        String[] playerTwoImagePaths = {
-                "resources/Nazicorn/nazicornLeft.png",
-                "resources/Nazicorn/nazicornRight.png"
-        };
-
-        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), playerOnePicture, playerOneImagePaths, Handler.getPlayerOneShooting());
-        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), playerTwoPicture, playerTwoImagePaths, Handler.getPlayerTwoShooting());
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting());
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
 
         stuffTimer = new Timer();
         stuffTimer.schedule(createStuff(), 1000, 1000);
