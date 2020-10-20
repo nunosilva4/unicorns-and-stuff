@@ -1,5 +1,6 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
+import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapCollision;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -8,6 +9,7 @@ import java.util.*;
 
 public class Player {
 
+    private Game game;
     private final String name;
     private final Set<Direction> movement;
     private Direction lastDirection;
@@ -17,11 +19,13 @@ public class Player {
     private final Set<Boolean> shooting;
     private boolean dead;
     private boolean stunned;
+    private int lives;
 
     private final List<Projectile> projectiles;
 
-    public Player(String name, Set<Direction> movement, Set<Boolean> shooting) {
-
+    public Player(String name, Set<Direction> movement, Set<Boolean> shooting, Game game) {
+        lives = 3;
+        this.game = game;
         this.name = name;
         this.shooting = shooting;
         this.movement = movement;
@@ -59,6 +63,12 @@ public class Player {
     public void hit(int damage) {
         if (health > 0) {
             health -= damage;
+            if (name.equals("Unicorn")) {
+                game.getPlayerOneHp().setText(String.valueOf(health));
+            }
+            if (name.equals("Nazicorn")) {
+                game.getPlayerTwoHp().setText(String.valueOf(health));
+            }
             System.out.println("HIT");
         }
     }
@@ -204,7 +214,15 @@ public class Player {
         return currentSprite;
     }
 
-    public int getHealth() {
-        return health;
+    public String getName() {
+        return name;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }

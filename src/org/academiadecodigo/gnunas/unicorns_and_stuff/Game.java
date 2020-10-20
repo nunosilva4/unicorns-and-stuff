@@ -10,6 +10,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 
 import java.util.*;
 
@@ -29,11 +30,23 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private Timer stuffTimer;
+    private final Timer stuffTimer;
+
+    private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
+    private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
 
     public Game(MapType mapType) {
 
+        start(mapType, 3, 3);
+
+    }
+
+    private void start(MapType mapType, int playerOneLives, int playerTwoLives) {
         KeyBindings.init();
+        new Text(WIDTH - 250, HEIGHT + 20, "Health:").draw();
+        playerOneHp.draw();
+        new Text(150, HEIGHT + 20, "Health:").draw();
+        playerTwoHp.draw();
 
         map = MapFactory.makeMap(mapType);
 
@@ -41,8 +54,11 @@ public class Game {
 
         players = new Player[2];
 
-        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting());
-        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting());
+        players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting(), this);
+        players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting(), this);
+
+        players[0].setLives(playerOneLives);
+        players[1].setLives(playerTwoLives);
 
         stuffTimer = new Timer();
 
@@ -51,7 +67,6 @@ public class Game {
         drawScreen();
 
         process();
-
     }
 
     private void drawScreen() {
@@ -107,12 +122,18 @@ public class Game {
             while (iterator.hasNext()) {
                 Projectile projectile = iterator.next();
                 projectile.move();
-                if(projectile.isDestroyed()) {
+                if (projectile.isDestroyed()) {
                     iterator.remove();
                 }
             }
 
-            if (player.isDead()){
+            if (player.isDead()) {
+                if (player.getLives() > 0) {
+                    player.setLives(player.getLives() - 1);
+                    playerOneHp.setText("100");
+                    playerTwoHp.setText("100");
+                    start(MapType.STANDARD, players[0].getLives(), players[1].getLives());
+                }
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
@@ -163,6 +184,14 @@ public class Game {
 
     public static Player[] getPlayers() {
         return players;
+    }
+
+    public Text getPlayerOneHp() {
+        return playerOneHp;
+    }
+
+    public Text getPlayerTwoHp() {
+        return playerTwoHp;
     }
 
     public static LinkedHashMap<GameObject, Player> getStuffList() {
