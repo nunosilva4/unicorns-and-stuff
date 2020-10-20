@@ -7,16 +7,16 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public abstract class GameObject {
 
-    private final Rectangle picture;
+    private final Picture picture;
 
-    public GameObject(int x, int y) {
-        picture = new Rectangle(x, y, 25, 25);
+    public GameObject(int x, int y, String string) {
+        picture = new Picture(x, y, string);
     }
 
     public abstract Player check();
 
     public void show() {
-        picture.fill();
+        picture.draw();
     }
 
     public void delete() {
