@@ -13,7 +13,7 @@ public class StuffFactory {
             case TRAP:
                 return new TrapStuff(x, y);
             case SHIT:
-                break;
+                return new ShitStuff(x, y);
             case METEORS:
                // return new Meteor(x, y);
         }
