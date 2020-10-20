@@ -30,21 +30,23 @@ public class Game {
 
     public static final int PADDING = 10;
 
-    private final Timer stuffTimer;
+    private Timer stuffTimer;
 
-    private Text playerOneHpText = new Text(WIDTH - 250, HEIGHT + 20, "Health:");
-    private Text playerTwoHpText = new Text( 150, HEIGHT + 20, "Health:");
-    private Text playerOneHp = new Text(WIDTH - 200 ,HEIGHT + 20, "100");
+    private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
     private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
 
     public Game(MapType mapType) {
 
-        KeyBindings.init();
+        start(mapType, 3, 3);
 
+    }
+
+    private void start(MapType mapType, int playerOneLives, int playerTwoLives) {
+        KeyBindings.init();
+        new Text(WIDTH - 250, HEIGHT + 20, "Health:").draw();
         playerOneHp.draw();
-        playerOneHpText.draw();
+        new Text(150, HEIGHT + 20, "Health:").draw();
         playerTwoHp.draw();
-        playerTwoHpText.draw();
 
         map = MapFactory.makeMap(mapType);
 
@@ -55,6 +57,9 @@ public class Game {
         players[0] = new Player("Unicorn", Handler.getPlayerOneMovement(), Handler.getPlayerOneShooting(), this);
         players[1] = new Player("Nazicorn", Handler.getPlayerTwoMovement(), Handler.getPlayerTwoShooting(), this);
 
+        players[0].setLives(playerOneLives);
+        players[1].setLives(playerTwoLives);
+
         stuffTimer = new Timer();
         stuffTimer.schedule(createStuff(), 1000, 3000);
         stuffTimer.schedule(deleteStuff(), 1500, 3500);
@@ -62,8 +67,8 @@ public class Game {
         drawScreen();
 
         process();
-
     }
+
 
     private void drawScreen() {
         Rectangle screen = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
@@ -83,7 +88,6 @@ public class Game {
         while (gameRunning) {
             updateGame();
             render();
-
 
             nextGameTick += SKIP_TICKS;
             sleepTime = nextGameTick - System.currentTimeMillis();
@@ -112,12 +116,18 @@ public class Game {
             while (iterator.hasNext()) {
                 Projectile projectile = iterator.next();
                 projectile.move();
-                if(projectile.isDestroyed()) {
+                if (projectile.isDestroyed()) {
                     iterator.remove();
                 }
             }
 
-            if (player.isDead()){
+            if (player.isDead()) {
+                if (player.getLives() > 0) {
+                    player.setLives(player.getLives() - 1);
+                    playerOneHp.setText("100");
+                    playerTwoHp.setText("100");
+                    start(MapType.STANDARD, players[0].getLives(), players[1].getLives());
+                }
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
@@ -142,16 +152,16 @@ public class Game {
     }
 
     private TimerTask deleteStuff() {
-       return new TimerTask() {
-           @Override
-           public void run() {
-               for (GameObject stuff : stuffList) {
-                   stuff.delete();
-                   stuffList.remove(stuff);
-                   break;
-               }
-           }
-       };
+        return new TimerTask() {
+            @Override
+            public void run() {
+                for (GameObject stuff : stuffList) {
+                    stuff.delete();
+                    stuffList.remove(stuff);
+                    break;
+                }
+            }
+        };
     }
 
     private int getRandomNumber(int min, int max) {

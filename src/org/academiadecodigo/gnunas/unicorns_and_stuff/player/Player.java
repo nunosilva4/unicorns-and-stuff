@@ -18,10 +18,12 @@ public class Player {
     private int health = 100;
     private final Set<Boolean> shooting;
     private boolean dead;
+    private int lives;
 
     private final List<Projectile> projectiles;
 
     public Player(String name, Set<Direction> movement, Set<Boolean> shooting, Game game) {
+        lives = 3;
         this.game = game;
         this.name = name;
         this.shooting = shooting;
@@ -199,7 +201,15 @@ public class Player {
         return currentSprite;
     }
 
-    public int getHealth() {
-        return health;
+    public String getName() {
+        return name;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 }
