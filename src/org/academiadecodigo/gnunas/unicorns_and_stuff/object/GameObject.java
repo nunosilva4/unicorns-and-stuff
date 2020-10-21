@@ -22,6 +22,7 @@ public abstract class GameObject {
         for (Player player : Game.getPlayers()) {
             if (isHitting(player)) {
                 this.player = player;
+                picture.delete();
                 interact();
                 return player;
             }

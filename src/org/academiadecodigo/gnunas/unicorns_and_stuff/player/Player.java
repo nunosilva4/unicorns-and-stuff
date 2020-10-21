@@ -111,6 +111,10 @@ public class Player {
 
         if (isSliding()) {
             direction = lastDirection;
+
+            if (MapCollision.hittingBottom(this) || MapCollision.hittingLeft(this) || MapCollision.hittingRight(this) || MapCollision.hittingTop(this)) {
+                setSliding(false);
+            }
         }
 
         if (direction == null) {
