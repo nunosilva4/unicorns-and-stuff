@@ -4,6 +4,8 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 
+import java.security.Key;
+
 public abstract class KeyBindings {
 
     public static void init() {
@@ -106,5 +108,6 @@ public abstract class KeyBindings {
         playerTwoDeleteRight.setKey(KeyboardEvent.KEY_D);
         playerTwoDeleteRight.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
         keyboard.addEventListener(playerTwoDeleteRight);
+
     }
 }
