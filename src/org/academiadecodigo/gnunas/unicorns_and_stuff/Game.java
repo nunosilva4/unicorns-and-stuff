@@ -147,7 +147,7 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                GameObject gameObject = createNewStuff(StuffType.values()[(int) (Math.random() * StuffType.values().length)], getRandomNumber(50, WIDTH - 50),
+                GameObject gameObject = createNewStuff(StuffType.values()[getRandomNumber(StuffType.values().length)], getRandomNumber(50, WIDTH - 50),
                         getRandomNumber(50, HEIGHT - 50));
                 if (gameObject == null) {
                     return;
@@ -174,8 +174,12 @@ public class Game {
         };
     }
 
-    private int getRandomNumber(int min, int max) {
+    public static int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    public static int getRandomNumber(int max) {
+        return (int) (Math.random() * max);
     }
 
     public static Player[] getPlayers() {
