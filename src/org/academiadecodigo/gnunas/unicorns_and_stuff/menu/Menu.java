@@ -38,6 +38,11 @@ public class Menu implements KeyboardHandler {
         pressKey.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(pressKey);
 
+        KeyboardEvent exit = new KeyboardEvent();
+        exit.setKey(KeyboardEvent.KEY_ESC);
+        exit.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(exit);
+
     }
 
     public void init() {
@@ -83,6 +88,10 @@ public class Menu implements KeyboardHandler {
         if (!gameStarted && keyboardEvent.getKey() == KeyboardEvent.KEY_C &&
                 arrow.getX() == 800 / 2 - 150 - 120 && arrow.getY() == 600 / 2 + 44) {
 
+            System.exit(0);
+        }
+
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_ESC) {
             System.exit(0);
         }
     }
