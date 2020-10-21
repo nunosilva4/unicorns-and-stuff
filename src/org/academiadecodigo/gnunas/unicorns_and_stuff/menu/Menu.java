@@ -15,11 +15,11 @@ public class Menu implements KeyboardHandler {
     public static boolean gameStarted;
 
     public Menu() {
+        Keyboard keyboard = new Keyboard(this);
         background = new Picture(Game.PADDING, Game.PADDING, "resources/Menu/background.jpg");
         arrow = new Picture((float)Game.WIDTH / 2 -150 -120,(float)Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
         play = new Picture((float)Game.WIDTH / 2 - 150,(float)Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
         exit = new Picture((float)Game.WIDTH / 2 - 150,(float)Game.HEIGHT / 2 + 44, "resources/Menu/Exit.jpg");
-        Keyboard keyboard = new Keyboard(this);
 
         //MOVE ARROW
         KeyboardEvent goToQuit = new KeyboardEvent();

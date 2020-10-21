@@ -93,12 +93,17 @@ public class Player {
         }
     }
 
-    public void move() {
-        if (dead) {
-            return;
+    private void stopSlidingIfCollides() {
+        if (MapCollision.hittingBottom(this) ||
+                MapCollision.hittingLeft(this) ||
+                MapCollision.hittingRight(this) ||
+                MapCollision.hittingTop(this)) {
+            setSliding(false);
         }
+    }
 
-        if (stunned) {
+    public void move() {
+        if (dead || stunned) {
             return;
         }
 
@@ -112,15 +117,15 @@ public class Player {
         if (isSliding()) {
             direction = lastDirection;
 
-            if (MapCollision.hittingBottom(this) || MapCollision.hittingLeft(this) || MapCollision.hittingRight(this) || MapCollision.hittingTop(this)) {
-                setSliding(false);
-            }
+            stopSlidingIfCollides();
         }
 
         if (direction == null) {
             return;
         }
 
+        //TODO DIAGONALS??
+    /*
         if (movement.contains(Direction.UP) && movement.contains(Direction.LEFT)) {
             if (MapCollision.hittingLeft(this) || MapCollision.hittingTop(this)) {
                 return;
@@ -156,7 +161,7 @@ public class Player {
             currentSprite.load(imagePath[1]);
             return;
         }
-
+*/
         switch (direction) {
             case UP:
                 lastDirection = Direction.UP;
