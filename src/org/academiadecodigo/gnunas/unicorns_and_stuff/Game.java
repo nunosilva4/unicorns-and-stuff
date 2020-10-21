@@ -5,8 +5,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyBindings;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.object.GameObject;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffType;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.object.*;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Projectile;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -101,16 +100,17 @@ public class Game {
     }
 
     private void updateGame() {
-        for (GameObject gameObject : stuffList.keySet()) {
-            if (stuffList.get(gameObject) != null) {
+        for (GameObject stuff : stuffList.keySet()) {
+            if (stuffList.get(stuff) != null) {
                 continue;
             }
 
-            Player player = gameObject.check();
-            if (player != null) {
-                player.stunPlayer(true);
-                stuffList.put(gameObject, player);
+            Player player = stuff.check();
+            if (player == null) {
+                continue;
             }
+
+            stuffList.put(stuff, player);
         }
 
         for (Player player : players) {
@@ -147,36 +147,31 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                GameObject gameObject = createNewStuff(StuffType.TRAP, getRandomNumber(50, WIDTH - 50),
+                GameObject gameObject = createNewStuff(StuffType.values()[(int) (Math.random() * StuffType.values().length)], getRandomNumber(50, WIDTH - 50),
                         getRandomNumber(50, HEIGHT - 50));
-                if (gameObject != null) {
-                    gameObject.show();
-                    stuffList.put(gameObject, null);
-
-                    stuffTimer.schedule(deleteStuff(), 5000);
+                if (gameObject == null) {
+                    return;
                 }
+                gameObject.show();
+                stuffList.put(gameObject, null);
 
+                stuffTimer.schedule(deleteStuff(), 5000);
             }
         };
     }
 
     private TimerTask deleteStuff() {
-       return new TimerTask() {
-           @Override
-           public void run() {
-               for (GameObject stuff : stuffList.keySet()) {
-                   Player player = stuffList.get(stuff);
-                   if (player != null) {
-                       player.stunPlayer(false);
-                   }
+        return new TimerTask() {
+            @Override
+            public void run() {
+                for (GameObject stuff : stuffList.keySet()) {
+                    stuff.delete();
+                    stuffList.remove(stuff);
 
-                   stuff.delete();
-                   stuffList.remove(stuff);
-
-                   break;
-               }
-           }
-       };
+                    break;
+                }
+            }
+        };
     }
 
     private int getRandomNumber(int min, int max) {
