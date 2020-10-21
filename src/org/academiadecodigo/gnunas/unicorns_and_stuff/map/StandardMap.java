@@ -8,7 +8,7 @@ public class StandardMap implements Map {
     private final Picture picture;
 
     public StandardMap() {
-        picture = new Picture(Game.PADDING, Game.PADDING, "resources/rsz_cenas.png");
+        picture = new Picture(Game.PADDING, Game.PADDING, "resources/grass.jpg");
         picture.draw();
     }
 }

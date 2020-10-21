@@ -23,9 +23,9 @@ public class Game {
 
     private static LinkedHashMap<GameObject, Player> stuffList;
 
-    public static final int WIDTH = 1024;
+    public static final int WIDTH = 800;
 
-    public static final int HEIGHT = 610;
+    public static final int HEIGHT = 600;
 
     public static final int PADDING = 10;
 

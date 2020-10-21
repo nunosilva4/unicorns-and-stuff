@@ -31,7 +31,7 @@ public class Player {
         this.shooting = shooting;
         this.movement = movement;
         if (this.name.equals("Unicorn")) {
-            currentSprite = new Picture(900, 300, "resources/Unicorn/unicornLeft.png");
+            currentSprite = new Picture(Game.WIDTH - 100, 300, "resources/Unicorn/unicornLeft.png");
 
             imagePath = new String[]{
                     "resources/Unicorn/unicornLeft.png",
