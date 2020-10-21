@@ -68,6 +68,7 @@ public class Game {
         process();
     }
 
+    
     private void drawScreen() {
         Rectangle screen = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
         screen.draw();
