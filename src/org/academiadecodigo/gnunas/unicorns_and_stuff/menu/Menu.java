@@ -17,9 +17,9 @@ public class Menu implements KeyboardHandler {
     public Menu() {
         Keyboard keyboard = new Keyboard(this);
         background = new Picture(Game.PADDING, Game.PADDING, "resources/Menu/background.jpg");
-        arrow = new Picture((float)Game.WIDTH / 2 -150 -120,(float)Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
-        play = new Picture((float)Game.WIDTH / 2 - 150,(float)Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
-        exit = new Picture((float)Game.WIDTH / 2 - 150,(float)Game.HEIGHT / 2 + 44, "resources/Menu/Exit.jpg");
+        arrow = new Picture((float) Game.WIDTH / 2 - 150 - 120, (float) Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
+        play = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
+        exit = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 + 44, "resources/Menu/Exit.jpg");
 
         //MOVE ARROW
         KeyboardEvent goToQuit = new KeyboardEvent();
@@ -58,15 +58,21 @@ public class Menu implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_Z && arrow.getX() == 800/2 -150 -120 && arrow.getY() == 600/2 -44) {
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_Z &&
+                arrow.getX() == 800 / 2 - 150 - 120 && arrow.getY() == 600 / 2 - 44) {
+
             goToQuit();
         }
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_X && arrow.getX() == 800/2 -150 -120 && arrow.getY() == 600/2 + 44) {
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_X &&
+                arrow.getX() == 800 / 2 - 150 - 120 && arrow.getY() == 600 / 2 + 44) {
+
             goToPlay();
         }
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_C && arrow.getX() == 800/2 -150 -120 && arrow.getY() == 600/2 - 44) {
+        if (!gameStarted && keyboardEvent.getKey() == KeyboardEvent.KEY_C &&
+                arrow.getX() == 800 / 2 - 150 - 120 && arrow.getY() == 600 / 2 - 44) {
+
             arrow.delete();
             background.delete();
             play.delete();
@@ -74,7 +80,9 @@ public class Menu implements KeyboardHandler {
             gameStarted = true;
         }
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_C && arrow.getX() == 800/2 -150 -120 && arrow.getY() == 600/2 + 44) {
+        if (!gameStarted && keyboardEvent.getKey() == KeyboardEvent.KEY_C &&
+                arrow.getX() == 800 / 2 - 150 - 120 && arrow.getY() == 600 / 2 + 44) {
+
             System.exit(0);
         }
     }
