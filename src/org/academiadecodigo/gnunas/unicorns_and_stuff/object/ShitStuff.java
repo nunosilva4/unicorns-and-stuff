@@ -10,20 +10,16 @@ public class ShitStuff extends GameObject {
     }
 
     @Override
-    public Player check() {
-        Player player = super.check();
+    public void interact() {
         if (player == null) {
-            return null;
+            return;
         }
 
         player.setSliding(true);
-
-        return player;
     }
 
     @Override
     public void delete() {
-        Player player = super.check();
         if (player != null) {
             player.setSliding(false);
         }

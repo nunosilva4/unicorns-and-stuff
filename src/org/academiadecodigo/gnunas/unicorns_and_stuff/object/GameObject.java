@@ -8,15 +8,21 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class GameObject {
 
+    protected Player player;
+
     private final Picture picture;
 
     public GameObject(int x, int y, String string) {
         picture = new Picture(x, y, string);
     }
 
-    public Player check() {
+    public abstract void interact();
+
+    public Player checkPlayer() {
         for (Player player : Game.getPlayers()) {
             if (isHitting(player)) {
+                this.player = player;
+                interact();
                 return player;
             }
         }

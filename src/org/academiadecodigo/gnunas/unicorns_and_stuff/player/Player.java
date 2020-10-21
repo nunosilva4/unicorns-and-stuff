@@ -91,7 +91,7 @@ public class Player {
         }
 
         if (isSliding()) {
-            direction = Direction.values()[(int)(Math.random() * Direction.values().length)];
+            direction = lastDirection;
         }
 
         if (direction == null) {

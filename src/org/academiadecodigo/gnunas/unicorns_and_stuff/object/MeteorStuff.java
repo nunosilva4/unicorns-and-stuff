@@ -15,13 +15,12 @@ public class MeteorStuff extends GameObject {
     }
 
     @Override
-    public Player check() {
-        Player player = super.check();
+    public void interact() {
         if (player == null) {
-            return null;
+            return;
         }
 
-        return player;
+        player.hit(DAMAGE);
     }
 
     public void move(){
