@@ -6,24 +6,25 @@ import org.academiadecodigo.simplegraphics.graphics.Movable;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 
-public class Meteor extends GameObject {
+public class MeteorStuff extends GameObject {
 
     private final int DAMAGE = 20;
 
-
-    public Meteor(int x, int y) {
-        super(x, y, "resources/Objects/meteor.png");
+    public MeteorStuff(int x, int y, String string) {
+        super(x, y, string);
     }
 
-    public void hit() {
-        for (Player player : Game.getPlayers()) {
-            if (!player.isDead()) {
-                player.hit(DAMAGE);
-            }
+    @Override
+    public Player check() {
+        Player player = super.check();
+        if (player == null) {
+            return null;
         }
+
+        return player;
     }
 
-    public void moveMeteor(Rectangle rectangleMeteor){
-        rectangleMeteor.translate(0, 1);
+    public void move(){
+
     }
 }
