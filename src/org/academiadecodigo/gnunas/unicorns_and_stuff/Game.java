@@ -128,12 +128,12 @@ public class Game {
             }
 
             if (player.isDead()) {
-                if (player.getLives() > 0) {
+                /*if (player.getLives() > 0) {
                     player.setLives(player.getLives() - 1);
                     playerOneHp.setText("100");
                     playerTwoHp.setText("100");
                     start(MapType.STANDARD, players[0].getLives(), players[1].getLives());
-                }
+                }*/
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
