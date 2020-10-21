@@ -1,7 +1,6 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.menu;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -13,32 +12,28 @@ public class Menu implements KeyboardHandler {
     private Picture arrow;
     private Picture play;
     private Picture exit;
-    private Keyboard keyboard;
-    private KeyboardEvent goToQuit;
-    private KeyboardEvent goToPlay;
-    private KeyboardEvent pressKey;
-    public static boolean draw;
+    public static boolean gameStarted;
 
     public Menu() {
         background = new Picture(Game.PADDING, Game.PADDING, "resources/Menu/background.jpg");
-        arrow = new Picture(800/2 -150 -120,600/2 - 44, "resources/Menu/pixil-frame-0.png");
-        play = new Picture(800/2 - 150,600/2 - 44, "resources/Menu/Play.jpg");
-        exit = new Picture(800/2 - 150,600/2 + 44, "resources/Menu/Exit.jpg");
-        keyboard = new Keyboard(this);
+        arrow = new Picture((float)Game.WIDTH / 2 -150 -120,(float)Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
+        play = new Picture((float)Game.WIDTH / 2 - 150,(float)Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
+        exit = new Picture((float)Game.WIDTH / 2 - 150,(float)Game.HEIGHT / 2 + 44, "resources/Menu/Exit.jpg");
+        Keyboard keyboard = new Keyboard(this);
 
         //MOVE ARROW
-        goToQuit = new KeyboardEvent();
+        KeyboardEvent goToQuit = new KeyboardEvent();
         goToQuit.setKey(KeyboardEvent.KEY_Z);
         goToQuit.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(goToQuit);
 
-        goToPlay = new KeyboardEvent();
+        KeyboardEvent goToPlay = new KeyboardEvent();
         goToPlay.setKey(KeyboardEvent.KEY_X);
         goToPlay.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(goToPlay);
 
         //START
-        pressKey = new KeyboardEvent();
+        KeyboardEvent pressKey = new KeyboardEvent();
         pressKey.setKey(KeyboardEvent.KEY_C);
         pressKey.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(pressKey);
@@ -76,8 +71,7 @@ public class Menu implements KeyboardHandler {
             background.delete();
             play.delete();
             exit.delete();
-            draw = true;
-            System.out.println("Entrar");
+            gameStarted = true;
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_C && arrow.getX() == 800/2 -150 -120 && arrow.getY() == 600/2 + 44) {

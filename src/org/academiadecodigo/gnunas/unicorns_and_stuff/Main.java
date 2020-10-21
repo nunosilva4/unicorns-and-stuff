@@ -2,9 +2,8 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.menu.Menu;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 
-public class UnicornsTest {
+public class Main {
     public static void main(String[] args) {
 
         /*Sound sound = new Sound("/resources/Sound/sound.wav");
@@ -18,7 +17,7 @@ public class UnicornsTest {
 
         Menu menu = new Menu();
 
-        while (Menu.draw == false){
+        while (!Menu.gameStarted){
             menu.init();
         }
         new Game(MapType.STANDARD);
