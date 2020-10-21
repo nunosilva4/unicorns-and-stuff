@@ -20,27 +20,16 @@ public class Game {
     private Map map;
 
     private static Player[] players;
-
     private static LinkedHashMap<GameObject, Player> stuffList;
-
     public static final int WIDTH = 800;
-
     public static final int HEIGHT = 600;
-
     public static final int PADDING = 10;
-
     private Timer stuffTimer;
-
     private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
     private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
+    private static boolean gameFinished = false;
 
-    public Game(MapType mapType) {
-
-        start(mapType, 3, 3);
-
-    }
-
-    private void start(MapType mapType, int playerOneLives, int playerTwoLives) {
+    public void start(MapType mapType, int playerOneLives, int playerTwoLives) {
         KeyBindings.init();
         new Text(WIDTH - 250, HEIGHT + 20, "Health:").draw();
         playerOneHp.draw();
@@ -132,9 +121,13 @@ public class Game {
                     player.setLives(player.getLives() - 1);
                     playerOneHp.setText("100");
                     playerTwoHp.setText("100");
-                    stuffList.clear();
-                    start(MapType.STANDARD, players[0].getLives(), players[1].getLives());
+                    while (true) {
+                        stuffList.clear();
+                        start(MapType.STANDARD, players[0].getLives(), players[1].getLives());
+                    }
                 }
+                gameFinished = true;
+                stuffList.clear();
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
@@ -148,6 +141,9 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
+                if (gameFinished){
+                    return;
+                }
                 GameObject gameObject = createNewStuff(StuffType.values()[getRandomNumber(StuffType.values().length)], getRandomNumber(50, WIDTH - 50),
                         getRandomNumber(50, HEIGHT - 50));
                 if (gameObject == null) {
