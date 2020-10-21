@@ -19,6 +19,7 @@ public class Player {
     private final Set<Boolean> shooting;
     private boolean dead;
     private boolean stunned;
+    private boolean sliding;
     private int lives;
 
     private final List<Projectile> projectiles;
@@ -87,6 +88,10 @@ public class Player {
 
         while (iterator.hasNext()) {
             direction = iterator.next();
+        }
+
+        if (isSliding()) {
+            direction = Direction.values()[(int)(Math.random() * Direction.values().length)];
         }
 
         if (direction == null) {
@@ -174,8 +179,12 @@ public class Player {
         }
     }
 
-    public void stunPlayer(boolean stuck) {
-        this.stunned = stuck;
+    public void setStunned(boolean stunned) {
+        this.stunned = stunned;
+    }
+
+    public void setSliding(boolean sliding) {
+        this.sliding = sliding;
     }
 
     public boolean isStunned() {
@@ -224,5 +233,9 @@ public class Player {
 
     public void setLives(int lives) {
         this.lives = lives;
+    }
+
+    public boolean isSliding() {
+        return sliding;
     }
 }
