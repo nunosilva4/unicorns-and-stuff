@@ -39,15 +39,8 @@ public abstract class GameObject {
     }
 
     public boolean isHitting(Player player) {
-        int playerBodyMaxX = player.getX() + player.getWidth() / 2;
-        int playerBodyMinX = player.getX() - player.getWidth() / 2;
-        int playerBodyMaxY = player.getY() + player.getHeight() / 2;
-        int playerBodyMinY = player.getY() - player.getHeight() / 2;
-
-        return (getX() - (getWidth() / 2)) + (getWidth() / 2) + Game.PADDING <= playerBodyMaxX &&
-                (getX() - (getWidth() / 2)) + (getWidth() / 2) + Game.PADDING >= playerBodyMinX &&
-                (getY() - (getHeight() / 2)) + (getHeight() / 2) + Game.PADDING <= playerBodyMaxY &&
-                (getY() - (getHeight() / 2)) + (getHeight() / 2) + Game.PADDING >= playerBodyMinY;
+        return getX() + Game.PADDING <= player.getX() &&
+                getY() + Game.PADDING >= player.getY();
     }
 
     public int getX() {
