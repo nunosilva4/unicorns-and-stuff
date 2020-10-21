@@ -11,11 +11,11 @@ public class StuffFactory {
     public static GameObject createNewStuff(StuffType stuffType, int x, int y) {
         switch (stuffType) {
             case TRAP:
-                return new TrapStuff(x, y);
+                return new TrapStuff(x, y, "resources/Objects/trap.png");
             case SHIT:
-                return new ShitStuff(x, y);
+                return new ShitStuff(x, y, "resources/Objects/shit.png");
             case METEORS:
-               // return new Meteor(x, y);
+                return new MeteorStuff(x, y, "resources/Objects/meteor.png");
         }
         return null;
     }
