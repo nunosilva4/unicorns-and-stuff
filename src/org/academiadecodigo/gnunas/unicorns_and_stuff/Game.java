@@ -84,17 +84,17 @@ public class Game {
         boolean gameRunning = true;
 
         while (gameRunning) {
-            updateGame();
-            render();
+            try {
+                updateGame();
+                render();
 
-            nextGameTick += SKIP_TICKS;
-            sleepTime = nextGameTick - System.currentTimeMillis();
-            if (sleepTime >= 0) {
-                try {
+                nextGameTick += SKIP_TICKS;
+                sleepTime = nextGameTick - System.currentTimeMillis();
+                if (sleepTime >= 0) {
                     Thread.sleep(sleepTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch (InterruptedException | ConcurrentModificationException ignored) {
+                ignored.printStackTrace();
             }
         }
     }
