@@ -1,6 +1,7 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.animation.Animation;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapCollision;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -15,12 +16,18 @@ public class Player {
     private Direction lastDirection;
     private Picture currentSprite;
     private String[] imagePath;
+    private String[] imagePathRight;
+    private String[] imagePathLeft;
+    private String[] imagePathFront;
+    private String[] imagePathBack;
     private int health = 100;
     private final Set<Boolean> shooting;
     private boolean dead;
     private boolean stunned;
     private boolean sliding;
     private int lives;
+    private Animation animation;
+    private short frame = 0;
 
     private final List<Projectile> projectiles;
 
@@ -30,23 +37,35 @@ public class Player {
         this.name = name;
         this.shooting = shooting;
         this.movement = movement;
+        animation = new Animation();
+
         if (this.name.equals("Unicorn")) {
-            currentSprite = new Picture(Game.WIDTH - 100, 300, "resources/Unicorn/unicornLeft.png");
+            currentSprite = new Picture(Game.WIDTH - 100, 300, "resources/cutiecornLeft/cutiecornLeft00.png");
 
             imagePath = new String[]{
-                    "resources/Unicorn/unicornLeft.png",
-                    "resources/Unicorn/unicornRight.png"
+                    "resources/cutiecornLeft/cutiecornLeft00.png",
+                    "resources/cutiecornRight/cutiecornRight00.png"
             };
+
+            imagePathFront = animation.getCutieImagePathFront();
+            imagePathBack = animation.getCutieImagePathBack();
+            imagePathRight = animation.getCutieImagePathRight();
+            imagePathLeft = animation.getCutieImagePathLeft();
 
             this.lastDirection = Direction.LEFT;
         }
         if (this.name.equals("Nazicorn")) {
-            currentSprite = new Picture(50, 300, "resources/Nazicorn/nazicornRight.png");
+            currentSprite = new Picture(50, 300, "resources/nazicorn2Right/nazicorn2Right00.png");
 
             imagePath = new String[]{
-                    "resources/Nazicorn/nazicornLeft.png",
-                    "resources/Nazicorn/nazicornRight.png"
+                    "resources/nazicorn2Left/nazicorn2Left.png",
+                    "resources/nazicorn2Right/nazicorn2Right00.png"
             };
+
+            imagePathFront = animation.getNazicornImagePathFront();
+            imagePathBack = animation.getNazicornImagePathBack();
+            imagePathRight = animation.getNazicornImagePathRight();
+            imagePathLeft = animation.getNazicornImagePathLeft();
 
             this.lastDirection = Direction.RIGHT;
         }
@@ -141,6 +160,10 @@ public class Player {
                     break;
                 }
                 currentSprite.translate(0, -1);
+                frame++;
+                if (frame % Animation.FRAME_RATE == 0) {
+                    currentSprite.load(imagePathBack[frame / Animation.FRAME_RATE % imagePathBack.length]);
+                }
                 break;
             case DOWN:
                 lastDirection = Direction.DOWN;
@@ -148,6 +171,10 @@ public class Player {
                     break;
                 }
                 currentSprite.translate(0, 1);
+                frame++;
+                if (frame % Animation.FRAME_RATE == 0) {
+                    currentSprite.load(imagePathFront[frame / Animation.FRAME_RATE % imagePathFront.length]);
+                }
                 break;
             case LEFT:
                 lastDirection = Direction.LEFT;
@@ -155,7 +182,10 @@ public class Player {
                     break;
                 }
                 currentSprite.translate(-1, 0);
-                currentSprite.load(imagePath[0]);
+                frame++;
+                if (frame % Animation.FRAME_RATE == 0) {
+                    currentSprite.load(imagePathLeft[frame / Animation.FRAME_RATE % imagePathLeft.length]);
+                }
                 break;
             case RIGHT:
                 lastDirection = Direction.RIGHT;
@@ -163,7 +193,10 @@ public class Player {
                     break;
                 }
                 currentSprite.translate(1, 0);
-                currentSprite.load(imagePath[1]);
+                frame++;
+                if (frame % Animation.FRAME_RATE == 0) {
+                    currentSprite.load(imagePathRight[frame / Animation.FRAME_RATE % imagePathRight.length]);
+                }
                 break;
             default:
                 break;
