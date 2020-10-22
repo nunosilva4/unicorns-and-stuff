@@ -4,7 +4,8 @@
  
 ## License & copyright ##
 
-Developed @ Academia de codigo
+Developed at @Academia de codigo
+
 © Created by Code Cadets                                   
 
 [@nunosilva4](https://github.com/nunosilva4)
@@ -39,13 +40,19 @@ Once upon a time, in a land far away called CandyLand, there lived Cutiecorn. He
 	As Nazicorn began to orchestrate his malefic plan, Cutiecorn was getting ready for war ! He would not stand idle to this spontaneous threat, he went straight in. TO BATTLE !!!
 	
   The code cadets panicked!
-“Holy shit, we need to fix this. Send STUFF their way !” said Jonas-chan. 
+“Holy shit, we need to fix this. Send STUFF their way !” said Jonas-chan.
+
 Edu-chan replied “Send them meteors!” 
+
 Nuno-chan: ”And traps !!” 
+
 Raquel-chan: “AND POOOOOOOOP !!!”
+
 To this Azix-chan replied: “And … “
+
 Everyone else: “Ok it’s settled. Meteors, traps and poop it is !”
-	As the two unicorns started to fight, they started to be bombarded with stuff from the gods. They are fighting against each other, but also against the world. Who will survive? Their faith is in your hands, fix what the 5 code cadet gods could not !
+
+  As the two unicorns started to fight, they started to be bombarded with stuff from the gods. They are fighting against each other, but also against the world. Who will survive? Their faith is in your hands, fix what the 5 code cadet gods could not !
 
 
 ## KeyBidings :
