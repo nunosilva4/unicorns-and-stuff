@@ -22,15 +22,25 @@ Project developed during the 5th week of Academia de Código's 54th bootcamp.
 Concepts learned until now:
 
 Basic Java
+
 Java Build Process
+
 Basic OOP
+
 Composition
+
 Inheritance
+
 Polymorphism
+
 Interfaces
+
 Simple Graphics Library
+
 Containers
+
 Nested Classes
+
 I/O Streams
 
 
