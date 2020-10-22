@@ -10,19 +10,14 @@ public class Main {
         Sound sound = new Sound("/resources/Sound/omerda.wav");
         sound.play(true);
         sound.setLoop(10);
-
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         Menu menu = new Menu();
+        Game game = new Game();
 
         while (!Menu.gameStarted){
             menu.init();
         }
-        new Game().start(MapType.STANDARD, 3, 3);
 
+        menu.clear();
+        game.start(MapType.STANDARD, 3, 3);
     }
 }

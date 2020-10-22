@@ -6,7 +6,11 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 
 import java.security.Key;
 
-public abstract class KeyBindings {
+public final class KeyBindings {
+
+    private KeyBindings() {
+
+    }
 
     public static void init() {
 

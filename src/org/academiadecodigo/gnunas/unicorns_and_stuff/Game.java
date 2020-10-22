@@ -56,7 +56,7 @@ public class Game {
 
         stuffTimer = new Timer();
 
-        stuffTimer.scheduleAtFixedRate(createStuff(), 1, 2000);
+        stuffTimer.scheduleAtFixedRate(createStuff(), 300, 2000);
 
         drawScreen();
 
@@ -81,15 +81,14 @@ public class Game {
         while (gameRunning) {
             try {
                 updateGame();
-                render();
 
                 nextGameTick += SKIP_TICKS;
                 sleepTime = nextGameTick - System.currentTimeMillis();
                 if (sleepTime >= 0) {
                     Thread.sleep(sleepTime);
                 }
-            } catch (InterruptedException | ConcurrentModificationException ignored) {
-                ignored.getMessage();
+            } catch (InterruptedException | ConcurrentModificationException e) {
+                e.getMessage(); //not doing anything on purpose
             }
         }
     }
@@ -116,10 +115,11 @@ public class Game {
 
             while (iterator.hasNext()) {
                 Projectile projectile = iterator.next();
-                projectile.move();
                 if (projectile.isDestroyed()) {
                     iterator.remove();
                 }
+                projectile.move();
+
             }
 
             if (player.isDead()) {
@@ -136,10 +136,6 @@ public class Game {
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
-    }
-
-    private void render() {
-
     }
 
     private TimerTask createStuff() {

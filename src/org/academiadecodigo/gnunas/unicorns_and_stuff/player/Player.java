@@ -92,14 +92,6 @@ public class Player {
         }
     }
 
-    private void stopSlidingIfCollides() {
-        if (MapCollision.hittingBottom(this) ||
-                MapCollision.hittingLeft(this) ||
-                MapCollision.hittingRight(this) ||
-                MapCollision.hittingTop(this)) {
-            setSliding(false);
-        }
-    }
 
     public void move() {
         if (dead || stunned) {
@@ -116,6 +108,9 @@ public class Player {
         if (isSliding()) {
             direction = lastDirection;
 
+            if (stunned) {
+                setSliding(false);
+            }
             stopSlidingIfCollides();
         }
 
@@ -228,10 +223,6 @@ public class Player {
         this.sliding = sliding;
     }
 
-    public boolean isStunned() {
-        return stunned;
-    }
-
     public List<Projectile> getProjectilesList() {
         return projectiles;
     }
@@ -264,10 +255,6 @@ public class Player {
         return currentSprite;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getLives() {
         return lives;
     }
@@ -278,5 +265,14 @@ public class Player {
 
     public boolean isSliding() {
         return sliding;
+    }
+
+    private void stopSlidingIfCollides() {
+        if (MapCollision.hittingBottom(this) ||
+                MapCollision.hittingLeft(this) ||
+                MapCollision.hittingRight(this) ||
+                MapCollision.hittingTop(this)) {
+            setSliding(false);
+        }
     }
 }
