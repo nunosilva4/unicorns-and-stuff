@@ -1,6 +1,7 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.menu;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyType;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -17,8 +18,12 @@ public class Menu implements KeyboardHandler {
     private Picture title;
     private Picture instructions;
 
+    private Keyboard keyboard;
+
     public Menu() {
-        Keyboard keyboard = new Keyboard(this);
+
+        keyboard = new Keyboard(this);
+
         background = new Picture(Game.PADDING, Game.PADDING, "resources/Menu/background.jpg");
         arrow = new Picture((float) Game.WIDTH / 2 - 150 - 120, (float) Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
         play = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
@@ -26,30 +31,10 @@ public class Menu implements KeyboardHandler {
         title = new Picture(60, 80, "resources/Menu/title.png");
         instructions = new Picture((float) Game.WIDTH - 250, (float) Game.HEIGHT - 260, "resources/Menu/instructions.png");
 
-
-
-        //MOVE ARROW
-        KeyboardEvent goToQuit = new KeyboardEvent();
-        goToQuit.setKey(KeyboardEvent.KEY_Z);
-        goToQuit.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goToQuit);
-
-        KeyboardEvent goToPlay = new KeyboardEvent();
-        goToPlay.setKey(KeyboardEvent.KEY_X);
-        goToPlay.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(goToPlay);
-
-        //START
-        KeyboardEvent pressKey = new KeyboardEvent();
-        pressKey.setKey(KeyboardEvent.KEY_C);
-        pressKey.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(pressKey);
-
-        KeyboardEvent exit = new KeyboardEvent();
-        exit.setKey(KeyboardEvent.KEY_ESC);
-        exit.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(exit);
-
+        KeyType.Z.init(keyboard, KeyboardEventType.KEY_PRESSED); //Arrow goes down!
+        KeyType.X.init(keyboard, KeyboardEventType.KEY_PRESSED); //Arrow goes up!
+        KeyType.C.init(keyboard, KeyboardEventType.KEY_PRESSED); //Press key!
+        KeyType.ESC.init(keyboard, KeyboardEventType.KEY_PRESSED); //Leave game!
     }
 
     public void init() {
