@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="UnicornsAndStuff" default="jarfile">
+<project name="Unicorns" default="jarfile">
 
     <!-- Initialize build properties  -->
     <target name="init" description="Initializes properties">
@@ -40,7 +40,7 @@
                 <attribute name="Class-Path" value="${lib.dir}" />
             </manifest>
             <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
-            <fileset dir="../../Desktop">
+            <fileset dir=".">
                 <include name="**/${resources.dir}/**"/>
             </fileset>
         </jar>
