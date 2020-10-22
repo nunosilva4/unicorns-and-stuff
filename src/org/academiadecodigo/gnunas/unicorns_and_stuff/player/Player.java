@@ -89,7 +89,6 @@ public class Player {
             if (name.equals("Nazicorn")) {
                 game.getPlayerTwoHp().setText(String.valueOf(health));
             }
-            System.out.println("HIT");
         }
     }
 

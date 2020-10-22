@@ -22,7 +22,7 @@ public class Main {
         while (!Menu.gameStarted){
             menu.init();
         }
-        new Game(MapType.STANDARD);
+        new Game().start(MapType.STANDARD, 3, 3);
 
     }
 }
