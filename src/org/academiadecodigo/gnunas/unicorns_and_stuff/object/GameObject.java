@@ -17,7 +17,7 @@ public abstract class GameObject {
 
     public abstract void interact();
 
-    public Player checkPlayer() {
+    public Player process() {
         for (Player player : Game.getPlayers()) {
             if (isHitting(player)) {
                 this.player = player;

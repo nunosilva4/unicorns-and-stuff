@@ -12,9 +12,9 @@ public class MeteorStuff extends GameObject {
     }
 
     @Override
-    public Player checkPlayer() {
+    public Player process() {
         move();
-        return super.checkPlayer();
+        return super.process();
     }
 
     @Override

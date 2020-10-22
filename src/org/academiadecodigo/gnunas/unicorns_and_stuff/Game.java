@@ -94,7 +94,7 @@ public class Game {
                 continue;
             }
 
-            Player player = stuff.checkPlayer();
+            Player player = stuff.process();
             if (player == null) {
                 continue;
             }
