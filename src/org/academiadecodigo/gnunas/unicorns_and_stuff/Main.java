@@ -1,11 +1,14 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
+import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyBindings;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.menu.Menu;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 
 public class Main {
     public static void main(String[] args) {
+
+        KeyBindings.init();
 
         Sound sound = new Sound("/resources/Sound/laid.wav");
         sound.play(true);

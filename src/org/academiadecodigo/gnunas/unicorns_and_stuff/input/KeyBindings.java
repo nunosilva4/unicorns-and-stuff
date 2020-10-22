@@ -10,6 +10,11 @@ public final class KeyBindings {
         Handler keyBindings = new Handler();
         Keyboard keyboard = new Keyboard(keyBindings);
 
+        Key.Z.init(keyboard, KeyboardEventType.KEY_PRESSED);
+        Key.X.init(keyboard, KeyboardEventType.KEY_PRESSED);
+        Key.C.init(keyboard, KeyboardEventType.KEY_PRESSED);
+        Key.ESC.init(keyboard, KeyboardEventType.KEY_PRESSED);
+
         Key.L.init(keyboard, KeyboardEventType.KEY_PRESSED);
         Key.UP.init(keyboard, KeyboardEventType.KEY_PRESSED);
         Key.RIGHT.init(keyboard, KeyboardEventType.KEY_PRESSED);

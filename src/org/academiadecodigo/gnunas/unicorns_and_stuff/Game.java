@@ -32,7 +32,6 @@ public class Game {
     private static boolean gameFinished = false;
 
     public void start(MapType mapType, int playerOneLives, int playerTwoLives) {
-        KeyBindings.init();
         new Text(WIDTH - 250, HEIGHT + 20, "Health:").draw();
         playerOneHp.draw();
         new Text(170, HEIGHT + 20, "Health:").draw();

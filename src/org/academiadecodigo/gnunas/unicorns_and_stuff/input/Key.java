@@ -9,7 +9,6 @@ public enum Key {
     X(KeyboardEvent.KEY_X),
     C(KeyboardEvent.KEY_C),
     ESC(KeyboardEvent.KEY_ESC),
-
     L(KeyboardEvent.KEY_L),
     UP(KeyboardEvent.KEY_UP),
     LEFT(KeyboardEvent.KEY_LEFT),
