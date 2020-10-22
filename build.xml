@@ -1,14 +1,15 @@
 <?xml version="1.0" ?>
-<project name="CarCrashX" default="jarfile">
+<project name="UnicornsAndStuff" default="jarfile">
 
     <!-- Initialize build properties  -->
     <target name="init" description="Initializes properties">
-        <property name="project.name" value="CarCrashX" />
+        <property name="project.name" value="${ant.project.name}" />
         <property name="src.dir" value="src" />
-        <property name="main.class" value="org.academiadecodigo.bootcamp.CarCrashX" />
+        <property name="main.class" value="org.academiadecodigo.gnunas.unicorns_and_stuff.Main" />
         <property name="build.dir" value="build" />
         <property name="classes.dir" value="${build.dir}/classes" />
         <property name="lib.dir" value="lib" />
+        <property name="resources.dir" value="resources"/>
         <path id="classpath">
             <fileset dir="${lib.dir}" includes="**/*.jar" />
         </path>
@@ -26,7 +27,7 @@
 
     <!-- Compiles the source code -->
     <target name="compile" description="Compiles the source code" depends="prepare">
-        <javac srcdir="${src.dir}" target="1.8" destdir="${classes.dir}">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" target="1.8">
             <classpath refid="classpath"/>
         </javac>
     </target>
@@ -39,6 +40,9 @@
                 <attribute name="Class-Path" value="${lib.dir}" />
             </manifest>
             <zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
+            <fileset dir="../../Desktop">
+                <include name="**/${resources.dir}/**"/>
+            </fileset>
         </jar>
     </target>
 

@@ -2,6 +2,7 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.menu;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Key;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -21,12 +22,16 @@ public class Menu {
     private Keyboard keyboard;
 
     public Menu() {
-        background = new Picture(Game.PADDING, Game.PADDING, "resources/Menu/background.jpg");
-        arrow = new Picture((float) Game.WIDTH / 2 - 150 - 120, (float) Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
-        play = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
-        exit = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 + 44, "resources/Menu/Exit.jpg");
-        title = new Picture(60, 80, "resources/Menu/title.png");
-        instructions = new Picture((float) Game.WIDTH - 250, (float) Game.HEIGHT - 260, "resources/Menu/instructions.png");
+        background = new Picture(Game.PADDING, Game.PADDING, "resources/menu/background.jpg");
+        arrow = new Picture((float) Game.WIDTH / 2 - 150 - 120, (float) Game.HEIGHT / 2 - 44, "resources/menu/pixil-frame-0.png");
+        play = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 - 44, "resources/menu/Play.jpg");
+        exit = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 + 44, "resources/menu/Exit.jpg");
+        title = new Picture(60, 80, "resources/menu/title.png");
+        instructions = new Picture((float) Game.WIDTH - 250, (float) Game.HEIGHT - 260, "resources/menu/instructions.png");
+
+        Sound sound = new Sound("/resources/sound/vodka.wav");
+        sound.play(true);
+        sound.setLoop(10);
     }
 
     public void init() {
