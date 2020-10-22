@@ -8,11 +8,11 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 public class Main {
     public static void main(String[] args) {
 
-        KeyBindings.init();
-
-        Sound sound = new Sound("/resources/Sound/laid.wav");
+        Sound sound = new Sound("/resources/Sound/vodka.wav");
         sound.play(true);
         sound.setLoop(10);
+
+        KeyBindings.init();
         Menu menu = new Menu();
         Game game = new Game();
 
