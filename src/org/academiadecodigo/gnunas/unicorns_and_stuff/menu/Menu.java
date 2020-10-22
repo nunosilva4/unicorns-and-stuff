@@ -29,7 +29,7 @@ public class Menu {
         title = new Picture(60, 80, "resources/menu/title.png");
         instructions = new Picture((float) Game.WIDTH - 250, (float) Game.HEIGHT - 260, "resources/menu/instructions.png");
 
-        Sound sound = new Sound("/resources/sound/vodka.wav");
+        Sound sound = new Sound("/resources/Sound/vodka.wav");
         sound.play(true);
         sound.setLoop(10);
     }

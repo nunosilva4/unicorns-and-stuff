@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="Unicorns" default="jarfile">
+<project name="UnicornsAndStuff" default="jarfile">
 
     <!-- Initialize build properties  -->
     <target name="init" description="Initializes properties">
