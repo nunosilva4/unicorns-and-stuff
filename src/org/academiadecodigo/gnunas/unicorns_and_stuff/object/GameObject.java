@@ -66,4 +66,7 @@ public abstract class GameObject {
         return picture.getWidth();
     }
 
+    public Picture getPicture() {
+        return picture;
+    }
 }
