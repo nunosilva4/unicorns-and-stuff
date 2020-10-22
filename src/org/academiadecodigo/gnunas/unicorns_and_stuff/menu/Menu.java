@@ -65,6 +65,13 @@ public class Menu implements KeyboardHandler {
         arrow.translate(0, -88);
     }
 
+    public void clear() {
+        arrow.delete();
+        background.delete();
+        play.delete();
+        exit.delete();
+    }
+
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_Z &&
@@ -82,10 +89,6 @@ public class Menu implements KeyboardHandler {
         if (!gameStarted && keyboardEvent.getKey() == KeyboardEvent.KEY_C &&
                 arrow.getX() == 800 / 2 - 150 - 120 && arrow.getY() == 600 / 2 - 44) {
 
-            arrow.delete();
-            background.delete();
-            play.delete();
-            exit.delete();
             gameStarted = true;
         }
 

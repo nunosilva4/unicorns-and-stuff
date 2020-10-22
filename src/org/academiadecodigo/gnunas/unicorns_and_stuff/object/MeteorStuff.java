@@ -24,6 +24,7 @@ public class MeteorStuff extends GameObject {
         }
 
         player.hit(DAMAGE);
+        getPicture().delete();
     }
 
     public void move(){

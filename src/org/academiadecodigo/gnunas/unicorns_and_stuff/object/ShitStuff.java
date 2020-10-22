@@ -1,8 +1,5 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.object;
 
-import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
-
 public class ShitStuff extends GameObject {
 
     public ShitStuff(int x, int y, String string) {
@@ -16,13 +13,11 @@ public class ShitStuff extends GameObject {
         }
 
         player.setSliding(true);
+        getPicture().delete();
     }
 
     @Override
     public void delete() {
-        /*if (player != null) {
-            player.setSliding(false);
-        }*/
 
         super.delete();
     }
