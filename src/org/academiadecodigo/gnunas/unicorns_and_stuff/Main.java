@@ -7,7 +7,7 @@ import org.academiadecodigo.gnunas.unicorns_and_stuff.sound.Sound;
 public class Main {
     public static void main(String[] args) {
 
-        Sound sound = new Sound("/resources/Sound/omerda.wav");
+        Sound sound = new Sound("/resources/Sound/laid.wav");
         sound.play(true);
         sound.setLoop(10);
         Menu menu = new Menu();
