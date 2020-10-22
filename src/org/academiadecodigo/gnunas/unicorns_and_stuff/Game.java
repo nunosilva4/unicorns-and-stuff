@@ -26,15 +26,21 @@ public class Game {
     public static final int PADDING = 10;
     private Timer stuffTimer;
     private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
-    private Text playerTwoHp = new Text(200, HEIGHT + 20, "100");
+    private Text playerTwoHp = new Text(220, HEIGHT + 20, "100");
+    private Text playerOneLives = new Text(WIDTH - 80, HEIGHT + 20, "Lives: ");
+    private Text playerTwoLives = new Text(50, HEIGHT + 20, "");
     private static boolean gameFinished = false;
 
     public void start(MapType mapType, int playerOneLives, int playerTwoLives) {
         KeyBindings.init();
         new Text(WIDTH - 250, HEIGHT + 20, "Health:").draw();
         playerOneHp.draw();
-        new Text(150, HEIGHT + 20, "Health:").draw();
+        new Text(170, HEIGHT + 20, "Health:").draw();
         playerTwoHp.draw();
+        this.playerOneLives.setText("Lives: " + playerOneLives);
+        this.playerTwoLives.setText("Lives: " + playerTwoLives);
+        this.playerOneLives.draw();
+        this.playerTwoLives.draw();
 
         map = MapFactory.makeMap(mapType);
 
@@ -83,7 +89,7 @@ public class Game {
                     Thread.sleep(sleepTime);
                 }
             } catch (InterruptedException | ConcurrentModificationException ignored) {
-                ignored.printStackTrace();
+                ignored.getMessage();
             }
         }
     }
@@ -117,7 +123,7 @@ public class Game {
             }
 
             if (player.isDead()) {
-                if (player.getLives() > 1) {
+                if (player.getLives() > 0) {
                     player.setLives(player.getLives() - 1);
                     playerOneHp.setText("100");
                     playerTwoHp.setText("100");
@@ -127,7 +133,6 @@ public class Game {
                     }
                 }
                 gameFinished = true;
-                stuffList.clear();
                 player.getCurrentSprite().load("resources/grave.png");
             }
         }
@@ -190,7 +195,4 @@ public class Game {
         return playerTwoHp;
     }
 
-    public static LinkedHashMap<GameObject, Player> getStuffList() {
-        return stuffList;
-    }
 }
