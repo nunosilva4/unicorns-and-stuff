@@ -17,7 +17,7 @@ public abstract class GameObject {
 
     public abstract void interact();
 
-    public Player checkPlayer() {
+    public Player process() {
         for (Player player : Game.getPlayers()) {
             if (isHitting(player)) {
                 this.player = player;
@@ -38,9 +38,16 @@ public abstract class GameObject {
         picture.delete();
     }
 
-    public boolean isHitting(Player player) {
-        return getX() + Game.PADDING <= player.getX() &&
-                getY() + Game.PADDING >= player.getY();
+    private boolean isHitting(Player player) {
+        int playerBodyMaxX = player.getX() + player.getWidth() / 2;
+        int playerBodyMinX = player.getX() - player.getWidth() / 2;
+        int playerBodyMaxY = player.getY() + player.getHeight() / 2;
+        int playerBodyMinY = player.getY() - player.getHeight() / 2;
+
+        return getX() + Game.PADDING <= playerBodyMaxX &&
+                getX() + Game.PADDING >= playerBodyMinX &&
+                getY() + Game.PADDING <= playerBodyMaxY &&
+                getY() + Game.PADDING >= playerBodyMinY;
     }
 
     public int getX() {
@@ -59,4 +66,7 @@ public abstract class GameObject {
         return picture.getWidth();
     }
 
+    public Picture getPicture() {
+        return picture;
+    }
 }

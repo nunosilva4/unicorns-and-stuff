@@ -20,9 +20,9 @@ public class ShitStuff extends GameObject {
 
     @Override
     public void delete() {
-        if (player != null) {
+        /*if (player != null) {
             player.setSliding(false);
-        }
+        }*/
 
         super.delete();
     }

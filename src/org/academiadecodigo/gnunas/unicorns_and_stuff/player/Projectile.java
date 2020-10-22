@@ -2,6 +2,7 @@ package org.academiadecodigo.gnunas.unicorns_and_stuff.player;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Direction;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
 
 public class Projectile {
@@ -20,6 +21,12 @@ public class Projectile {
         projectileSpeed = 4;
         this.player = player;
         projectileSprite.fill();
+        if (player == Game.getPlayers()[0]){
+            projectileSprite.setColor(Color.PINK);
+        }
+        if (player == Game.getPlayers()[1]){
+            projectileSprite.setColor(Color.ORANGE);
+        }
     }
 
     public boolean isHitting(Player player) {
