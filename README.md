@@ -76,6 +76,8 @@ Move using W(up), S(down), A(left), D(right) -  shoot using SPACE key - Player N
 
 Move using arrows keys - shoot using L key - Player Unicorn
 
+Esc key - Exit
+
 Stuff's :
 
 Shit - make you slice over the map
