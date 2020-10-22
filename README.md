@@ -9,9 +9,13 @@ Developed at @Academia de codigo
 © Created by Code Cadets                                   
 
 [@nunosilva4](https://github.com/nunosilva4)
+
 [@soyelraul](https://github.com/soyelraul)
+
 [@TheRaquelMartins](https://github.com/TheRaquelMartins)
+
 [@LuisMoreira95](https://github.com/LuisMoreira95)
+
 [@Jonasbr93](https://github.com/Jonasbr93)
 
 Project developed during the 5th week of Academia de Código's 54th bootcamp.
