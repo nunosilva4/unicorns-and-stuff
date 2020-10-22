@@ -8,7 +8,6 @@ public class MapFactory {
             case STANDARD:
                 return new StandardMap();
             default:
-                //TODO continue implementation when there are new maps
                 throw new IllegalArgumentException();
         }
     }

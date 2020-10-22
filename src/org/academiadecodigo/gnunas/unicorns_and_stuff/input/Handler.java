@@ -1,6 +1,8 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.input;
 
+import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.menu.Menu;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.player.Player;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
@@ -68,6 +70,33 @@ public class Handler implements KeyboardHandler {
                 break;
             case KEY_ESC:
                 System.exit(0);
+                break;
+            case KEY_U:
+
+                Player playerOne = Game.getPlayers()[0];
+                Player playerTwo = Game.getPlayers()[1];
+
+                Game.setGameFinished(false);
+                if (playerOne.isDead()) {
+                    playerOne.setLives(4);
+                    playerTwo.setLives(3);
+                    Game.getPlayerOneLivesText().setText("Lives: 3");
+                    Game.getPlayerTwoLivesText().setText("Lives: 3");
+                    return;
+                }
+                if (playerTwo.isDead()) {
+                    playerOne.setLives(3);
+                    playerTwo.setLives(4);
+                    Game.getPlayerOneLivesText().setText("Lives: 3");
+                    Game.getPlayerTwoLivesText().setText("Lives: 3");
+                    return;
+                }
+                if (playerTwo.isDead() && playerOne.isDead()) {
+                    playerOne.setLives(4);
+                    playerTwo.setLives(4);
+                    Game.getPlayerOneLivesText().setText("Lives: 3");
+                    Game.getPlayerTwoLivesText().setText("Lives: 3");
+                }
                 break;
         }
     }

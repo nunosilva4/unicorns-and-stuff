@@ -27,7 +27,7 @@ public class MeteorStuff extends GameObject {
         getPicture().delete();
     }
 
-    public void move(){
+    public void move() {
         getPicture().translate(1, 1);
 
         if (MapCollision.hittingBottom(this) ||

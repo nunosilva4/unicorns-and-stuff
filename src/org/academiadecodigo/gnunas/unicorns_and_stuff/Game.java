@@ -1,8 +1,6 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Handler;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyBindings;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.map.Map;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapFactory;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.map.MapType;
 import org.academiadecodigo.gnunas.unicorns_and_stuff.object.*;
@@ -17,8 +15,6 @@ import static org.academiadecodigo.gnunas.unicorns_and_stuff.object.StuffFactory
 
 public class Game {
 
-    private Map map;
-
     private static Player[] players;
     private static LinkedHashMap<GameObject, Player> stuffList;
     public static final int WIDTH = 800;
@@ -27,21 +23,25 @@ public class Game {
     private Timer stuffTimer;
     private Text playerOneHp = new Text(WIDTH - 200, HEIGHT + 20, "100");
     private Text playerTwoHp = new Text(220, HEIGHT + 20, "100");
-    private Text playerOneLives = new Text(WIDTH - 80, HEIGHT + 20, "Lives: ");
-    private Text playerTwoLives = new Text(50, HEIGHT + 20, "");
+    private static Text playerOneLivesText = new Text(WIDTH - 80, HEIGHT + 20, "Lives: ");
+    private static Text playerTwoLivesText = new Text(50, HEIGHT + 20, "");
+    private int playerOneLives;
+    private int playerTwoLives;
     private static boolean gameFinished = false;
 
     public void start(MapType mapType, int playerOneLives, int playerTwoLives) {
+        this.playerOneLives = playerOneLives;
+        this.playerTwoLives = playerTwoLives;
         new Text(WIDTH - 250, HEIGHT + 20, "Health:").draw();
         playerOneHp.draw();
         new Text(170, HEIGHT + 20, "Health:").draw();
         playerTwoHp.draw();
-        this.playerOneLives.setText("Lives: " + playerOneLives);
-        this.playerTwoLives.setText("Lives: " + playerTwoLives);
-        this.playerOneLives.draw();
-        this.playerTwoLives.draw();
+        playerOneLivesText.setText("Lives: " + this.playerOneLives);
+        playerTwoLivesText.setText("Lives: " + this.playerTwoLives);
+        playerOneLivesText.draw();
+        playerTwoLivesText.draw();
 
-        map = MapFactory.makeMap(mapType);
+        MapFactory.makeMap(mapType);
 
         stuffList = new LinkedHashMap<>();
 
@@ -56,6 +56,7 @@ public class Game {
         stuffTimer = new Timer();
 
         stuffTimer.scheduleAtFixedRate(createStuff(), 300, 2000);
+        stuffTimer.scheduleAtFixedRate(createStuff(), 400, 2000);
 
         drawScreen();
 
@@ -87,7 +88,7 @@ public class Game {
                     Thread.sleep(sleepTime);
                 }
             } catch (InterruptedException | ConcurrentModificationException e) {
-                e.getMessage(); //not doing anything on purpose
+                e.getMessage(); //not doing anything on purpose. Fail-fast throwing exceptions
             }
         }
     }
@@ -126,6 +127,7 @@ public class Game {
                     player.setLives(player.getLives() - 1);
                     playerOneHp.setText("100");
                     playerTwoHp.setText("100");
+                    stuffTimer.cancel();
                     while (true) {
                         stuffList.clear();
                         start(MapType.STANDARD, players[0].getLives(), players[1].getLives());
@@ -141,7 +143,7 @@ public class Game {
         return new TimerTask() {
             @Override
             public void run() {
-                if (gameFinished){
+                if (gameFinished) {
                     return;
                 }
                 GameObject gameObject = createNewStuff(StuffType.values()[getRandomNumber(StuffType.values().length)], getRandomNumber(50, WIDTH - 50),
@@ -190,4 +192,15 @@ public class Game {
         return playerTwoHp;
     }
 
+    public static Text getPlayerOneLivesText() {
+        return playerOneLivesText;
+    }
+
+    public static Text getPlayerTwoLivesText() {
+        return playerTwoLivesText;
+    }
+
+    public static void setGameFinished(boolean gameFinished) {
+        Game.gameFinished = gameFinished;
+    }
 }

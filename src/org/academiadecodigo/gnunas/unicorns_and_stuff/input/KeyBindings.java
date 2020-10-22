@@ -27,6 +27,8 @@ public final class KeyBindings {
         Key.A.init(keyboard, KeyboardEventType.KEY_PRESSED);
         Key.S.init(keyboard, KeyboardEventType.KEY_PRESSED);
 
+        Key.U.init(keyboard, KeyboardEventType.KEY_PRESSED);
+
         Key.L.init(keyboard, KeyboardEventType.KEY_RELEASED);
         Key.UP.init(keyboard, KeyboardEventType.KEY_RELEASED);
         Key.RIGHT.init(keyboard, KeyboardEventType.KEY_RELEASED);

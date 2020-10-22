@@ -18,7 +18,8 @@ public enum Key {
     W(KeyboardEvent.KEY_W),
     D(KeyboardEvent.KEY_D),
     A(KeyboardEvent.KEY_A),
-    S(KeyboardEvent.KEY_S);
+    S(KeyboardEvent.KEY_S),
+    U(KeyboardEvent.KEY_U);
 
     private final int key;
 

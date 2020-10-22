@@ -21,10 +21,10 @@ public class Projectile {
         projectileSpeed = 4;
         this.player = player;
         projectileSprite.fill();
-        if (player == Game.getPlayers()[0]){
+        if (player == Game.getPlayers()[0]) {
             projectileSprite.setColor(Color.PINK);
         }
-        if (player == Game.getPlayers()[1]){
+        if (player == Game.getPlayers()[1]) {
             projectileSprite.setColor(Color.ORANGE);
         }
     }
@@ -102,10 +102,6 @@ public class Projectile {
 
     public int getHeight() {
         return projectileSprite.getHeight();
-    }
-
-    public int getDamageAmount() {
-        return damageAmount;
     }
 
     private boolean hitsY() {
