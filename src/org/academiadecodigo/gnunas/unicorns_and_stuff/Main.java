@@ -13,7 +13,7 @@ public class Main {
         Menu menu = new Menu();
         Game game = new Game();
 
-        while (!Menu.gameStarted){
+        while (!menu.isGameStarted()){
             menu.init();
         }
 

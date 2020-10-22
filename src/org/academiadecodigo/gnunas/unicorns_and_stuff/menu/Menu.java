@@ -8,11 +8,14 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Menu implements KeyboardHandler {
+    private boolean gameStarted;
+
     private Picture background;
     private Picture arrow;
     private Picture play;
     private Picture exit;
-    public static boolean gameStarted;
+    private Picture title;
+    private Picture instructions;
 
     public Menu() {
         Keyboard keyboard = new Keyboard(this);
@@ -20,10 +23,10 @@ public class Menu implements KeyboardHandler {
         arrow = new Picture((float) Game.WIDTH / 2 - 150 - 120, (float) Game.HEIGHT / 2 - 44, "resources/Menu/pixil-frame-0.png");
         play = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 - 44, "resources/Menu/Play.jpg");
         exit = new Picture((float) Game.WIDTH / 2 - 150, (float) Game.HEIGHT / 2 + 44, "resources/Menu/Exit.jpg");
-        background.draw();
-        arrow.draw();
-        play.draw();
-        exit.draw();
+        title = new Picture(60, 80, "resources/Menu/title.png");
+        instructions = new Picture((float) Game.WIDTH - 250, (float) Game.HEIGHT - 260, "resources/Menu/instructions.png");
+
+
 
         //MOVE ARROW
         KeyboardEvent goToQuit = new KeyboardEvent();
@@ -54,6 +57,8 @@ public class Menu implements KeyboardHandler {
         arrow.draw();
         play.draw();
         exit.draw();
+        title.draw();
+        instructions.draw();
     }
 
     //TODO: Make the movement by differences to be dynamic
@@ -70,6 +75,8 @@ public class Menu implements KeyboardHandler {
         background.delete();
         play.delete();
         exit.delete();
+        title.delete();
+        instructions.delete();
     }
 
     @Override
@@ -105,5 +112,9 @@ public class Menu implements KeyboardHandler {
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
     }
 }
