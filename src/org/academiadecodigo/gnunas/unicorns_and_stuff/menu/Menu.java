@@ -1,7 +1,7 @@
 package org.academiadecodigo.gnunas.unicorns_and_stuff.menu;
 
 import org.academiadecodigo.gnunas.unicorns_and_stuff.Game;
-import org.academiadecodigo.gnunas.unicorns_and_stuff.input.KeyType;
+import org.academiadecodigo.gnunas.unicorns_and_stuff.input.Key;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -31,10 +31,10 @@ public class Menu implements KeyboardHandler {
         title = new Picture(60, 80, "resources/Menu/title.png");
         instructions = new Picture((float) Game.WIDTH - 250, (float) Game.HEIGHT - 260, "resources/Menu/instructions.png");
 
-        KeyType.Z.init(keyboard, KeyboardEventType.KEY_PRESSED); //Arrow goes down!
-        KeyType.X.init(keyboard, KeyboardEventType.KEY_PRESSED); //Arrow goes up!
-        KeyType.C.init(keyboard, KeyboardEventType.KEY_PRESSED); //Press key!
-        KeyType.ESC.init(keyboard, KeyboardEventType.KEY_PRESSED); //Leave game!
+        Key.Z.init(keyboard, KeyboardEventType.KEY_PRESSED); //Arrow goes down!
+        Key.X.init(keyboard, KeyboardEventType.KEY_PRESSED); //Arrow goes up!
+        Key.C.init(keyboard, KeyboardEventType.KEY_PRESSED); //Press key!
+        Key.ESC.init(keyboard, KeyboardEventType.KEY_PRESSED); //Leave game!
     }
 
     public void init() {
